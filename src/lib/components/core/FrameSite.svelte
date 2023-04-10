@@ -10,7 +10,7 @@
           funcionAludida: undefined,
           numOpciones: 3,
           posicion: 'nw',
-          rutaArchivosOpciones: '/icons/categorias/',
+          rutaArchivosOpciones: 'icons/categorias/',
           seleccionActiva: true,
           color: '#d2b7f7',
       }}
@@ -71,7 +71,7 @@
           funcionAludida: anchorFunction,
           numOpciones: 4,
           posicion: 'ne',
-          rutaArchivosOpciones: '/icons/trazabilidad/',
+          rutaArchivosOpciones: 'icons/trazabilidad/',
           seleccionActiva: false,
           color: '#d2b7f7',
       }}

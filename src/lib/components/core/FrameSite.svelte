@@ -25,7 +25,7 @@
           nombre: 'Ekmajstro Pre Cion',
           // nombreArchivo: 'ekmajstro',
           urlArchivo: `${assets}/img/icons/core/ekmajstro.svg`,
-          enlace: '/',
+          enlace: './',
           redirigir: true
       }}
   />
@@ -53,7 +53,7 @@
           nombre: 'Alta Lengua',
           // nombreArchivo: 'al',
           urlArchivo: `${assets}/img/icons/core/al.svg`,
-          enlace: '/about',
+          enlace: './about',
           redirigir: true
       }}
   />

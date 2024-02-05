@@ -61,7 +61,7 @@
   {location.href}
   <Router>
     <div class='main'>
-      <Route path="**" component={ SearchPage } />
+      <Route path="" component={ SearchPage } />
     </div>
   </Router>
 </main>

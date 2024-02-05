@@ -1,7 +1,7 @@
 <script>
   export let logoRecurso, logoTraza, logoEstilo;
 
-  let src = `img/core/${logoRecurso.nombreArchivo}.svg`;
+  let src = `/img/core/${logoRecurso.nombreArchivo}.svg`;
   let a = 'initial';
 </script>
 

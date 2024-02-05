@@ -52,7 +52,8 @@
     {#each [...opciones,...opciones].slice(elementoInicial, elementoInicial + funcionalidad.numOpciones) as opcion, indice}
       <li class="elemento" style={getStyleElemento(indice)}>
         <button on:click={funcionalidad.funcionAludida(opcion.parametrosFuncionAludida)} class="subelemento" style={getStyleElemento(indice)}>
-          <img class="background" src={funcionalidad.rutaArchivosOpciones + opcion.nombreArchivo + '.svg'}/>
+          <img class="background" src={ opcion.nombreArchivo }/>
+          <!--svelte:component this={ opcion.nombreArchivo } /-->
         </button>
       </li>
     {/each}
@@ -88,11 +89,49 @@
           class="boton-seguir"
           on:click={() => addElementoInicial(1)}
         >
+          {#if (funcionalidad.posicion.toLowerCase().includes('n'))}
+            {#if (funcionalidad.posicion.toLowerCase().includes('e'))}
+              <img class="boton_navegar_siguiente" src="icons/utils/chevron_up.svg" />
+            {/if}
+
+            {#if (funcionalidad.posicion.toLowerCase().includes('w'))}
+              <img class="boton_navegar_siguiente" src="icons/utils/chevron_left.svg" />
+            {/if}
+          {/if}
+
+          {#if (funcionalidad.posicion.toLowerCase().includes('s'))}
+            {#if (funcionalidad.posicion.toLowerCase().includes('e'))}
+              <img class="boton_navegar_siguiente" src="icons/utils/chevron_right.svg" />
+            {/if}
+
+            {#if (funcionalidad.posicion.toLowerCase().includes('w'))}
+              <img class="boton_navegar_siguiente" src="icons/utils/chevron_down.svg" />
+            {/if}
+          {/if}
         </button>
         <button
           class="boton-volver"
           on:click={() => addElementoInicial(-1)}
         >
+          {#if (funcionalidad.posicion.toLowerCase().includes('n'))}
+            {#if (funcionalidad.posicion.toLowerCase().includes('e'))}
+              <img class="boton_navegar_siguiente" src="icons/utils/chevron_right.svg" />
+            {/if}
+
+            {#if (funcionalidad.posicion.toLowerCase().includes('w'))}
+              <img class="boton_navegar_siguiente" src="icons/utils/chevron_up.svg" />
+            {/if}
+          {/if}
+
+          {#if (funcionalidad.posicion.toLowerCase().includes('s'))}
+            {#if (funcionalidad.posicion.toLowerCase().includes('e'))}
+              <img class="boton_navegar_siguiente" src="icons/utils/chevron_down.svg" />
+            {/if}
+
+            {#if (funcionalidad.posicion.toLowerCase().includes('w'))}
+              <img class="boton_navegar_siguiente" src="icons/utils/chevron_left.svg" />
+            {/if}
+          {/if}
         </button>
       {/if}
     </div>
@@ -132,22 +171,22 @@
 
   .top-corner.left-corner .menuRadial {
     translate: 0;
-    border-bottom-right-radius: 50%;
+    border-bottom-right-radius: 75%;
   }
 
   .top-corner.right-corner .menuRadial {
     translate: -50% 0%;
-    border-bottom-left-radius: 50%;
+    border-bottom-left-radius: 75%;
   }
 
   .bottom-corner.left-corner .menuRadial {
     translate: 0 -50%;
-    border-top-right-radius: 50%;
+    border-top-right-radius: 75%;
   }
 
   .bottom-corner.right-corner .menuRadial {
     translate: -50% -50%;
-    border-top-left-radius: 50%;
+    border-top-left-radius: 75%;
   }
 
   .top-corner.left-corner .elemento {

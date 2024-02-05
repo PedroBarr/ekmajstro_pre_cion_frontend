@@ -1,5 +1,7 @@
 <script>
   export let consigna;
+  export let tipos_recurso = [];
+  export let trazabilidad_social = [];
   import CornerBar from './CornerBar.svelte';
   import { anchorFunction } from '../../services/shared/utils_web.js';
 </script>
@@ -10,46 +12,12 @@
           funcionAludida: undefined,
           numOpciones: 3,
           posicion: 'nw',
-          rutaArchivosOpciones: 'icons/categorias/',
+          rutaArchivosOpciones: '/icons/categorias/',
           seleccionActiva: true,
           color: '#d2b7f7',
       }}
 
-      opciones={[
-        {
-          nombre: 'Arreglista Musical',
-          nombreArchivo: 'arreglistaMusical',
-          parametrosFuncionAludida: 'filtro arreglistaMusical',
-        }, {
-          nombre: 'Bellas Artes',
-          nombreArchivo: 'bellasArtes',
-          parametrosFuncionAludida: 'filtro bellasArtes',
-        }, {
-          nombre: 'Ciencias de la Computacion',
-          nombreArchivo: 'cienciasComputacion',
-          parametrosFuncionAludida: 'filtro cienciasComputacion',
-        }, {
-          nombre: 'Difusion del Conocimiento',
-          nombreArchivo: 'difusionConocimiento',
-          parametrosFuncionAludida: 'filtro difusionConocimiento',
-        }, {
-          nombre: 'Edicion Multimedia',
-          nombreArchivo: 'edicionMultimedia',
-          parametrosFuncionAludida: 'filtro edicionMultimedia',
-        }, {
-          nombre: 'Escritura Creativa',
-          nombreArchivo: 'escrituraCreativa',
-          parametrosFuncionAludida: 'filtro escrituraCreativa',
-        }, {
-          nombre: 'Ideas y Artesanias',
-          nombreArchivo: 'ideasArtesanias',
-          parametrosFuncionAludida: 'filtro ideasArtesanias',
-        }, {
-          nombre: 'Ludica y Entretenimiento',
-          nombreArchivo: 'ludicaEntretenimiento',
-          parametrosFuncionAludida: 'filtro ludicaEntretenimiento',
-        }
-      ]}
+      opciones={ tipos_recurso }
 
       trazabilidad={{
           colorPrincipal: '#fa5a65aa',
@@ -71,30 +39,12 @@
           funcionAludida: anchorFunction,
           numOpciones: 4,
           posicion: 'ne',
-          rutaArchivosOpciones: 'icons/trazabilidad/',
+          rutaArchivosOpciones: '/icons/trazabilidad/',
           seleccionActiva: false,
           color: '#d2b7f7',
       }}
 
-      opciones={[
-        {
-          nombre: 'Redes personales',
-          nombreArchivo: 'personalNetwork',
-          parametrosFuncionAludida: 'https://www.instagram.com/pedrobarr203',
-        }, {
-          nombre: 'Redes del consumidor',
-          nombreArchivo: 'consumerNetwork',
-          parametrosFuncionAludida: 'https://www.youtube.com/@pedrobarr_2037',
-        }, {
-          nombre: 'Codigo fuente',
-          nombreArchivo: 'sourceCode',
-          parametrosFuncionAludida: 'https://github.com/PedroBarr',
-        }, {
-          nombre: 'Fuente de proposito',
-          nombreArchivo: 'sourcePurpose',
-          parametrosFuncionAludida: 'https://pedrobarr.github.io/',
-        }
-      ]}
+      opciones={ trazabilidad_social }
 
       trazabilidad={{
           colorPrincipal: '#01706cdd',

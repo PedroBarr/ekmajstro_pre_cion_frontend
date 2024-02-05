@@ -72,7 +72,8 @@
 
         logoRecurso={{
             nombreArchivo:trazabilidad.nombreArchivo,
-            colorPrincipal: trazabilidad.colorPrincipal
+            colorPrincipal: trazabilidad.colorPrincipal,
+            urlArchivo: trazabilidad.urlArchivo,
         }}
 
         logoTraza={{

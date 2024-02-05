@@ -4,6 +4,7 @@
   export let trazabilidad_social = [];
   import CornerBar from './CornerBar.svelte';
   import { anchorFunction } from '../../services/shared/utils_web.js';
+  import { assets } from '../../../assets/static/code/app.js';
 </script>
 
 <div class="frame-of-site">
@@ -22,7 +23,8 @@
       trazabilidad={{
           colorPrincipal: '#fa5a65aa',
           nombre: 'Ekmajstro Pre Cion',
-          nombreArchivo: 'ekmajstro',
+          // nombreArchivo: 'ekmajstro',
+          urlArchivo: `${assets}/img/icons/core/ekmajstro.svg`,
           enlace: '/',
           redirigir: true
       }}
@@ -49,7 +51,8 @@
       trazabilidad={{
           colorPrincipal: '#01706cdd',
           nombre: 'Alta Lengua',
-          nombreArchivo: 'al',
+          // nombreArchivo: 'al',
+          urlArchivo: `${assets}/img/icons/core/al.svg`,
           enlace: '/about',
           redirigir: true
       }}

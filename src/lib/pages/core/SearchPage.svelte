@@ -1,8 +1,12 @@
 <script lang='ts'>
+  // importar componentes
   import SearchBox from '../../components/core/SearchBox.svelte';
   import PreviewContainer from '../../components/features/feature_entradas/PreviewContainer.svelte';
 
+  // importar dependencias nativas
   import { onMount } from 'svelte';
+
+  // importar dependencias propias
   import { api } from '../../../assets/static/code/app.js';
 
   import {

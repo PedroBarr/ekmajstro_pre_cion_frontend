@@ -1,4 +1,5 @@
 <script>
+  // exportar dependencias
   export let buttonClass = '';
 </script>
 

@@ -1,10 +1,18 @@
 <script>
+  // importar componentes
   import FrameSite from './lib/components/core/FrameSite.svelte';
+
+  // importar dependencias nativas
   import { onMount } from 'svelte';
   import { Router, Route, Link, link } from 'svelte-routing';
+
+  // importar dependencias propias
   import { api } from './assets/static/code/app.js';
+
+  // importar paginas
   import SearchPage from './lib/pages/core/SearchPage.svelte'
 
+  // variables
   let consigna = '';
   let tipos_recurso = [];
   let trazabilidad_social = [];
@@ -15,12 +23,18 @@
 
   onMount(
     async ( ) => {
+      /*
+       * Actualizar consigna del sitio
+       */
       fetch(api)
         .then(response => response.json() )
         .then(data => {
           setConsigna('\u269E ' + data + ' \u269F');
         });
 
+      /*
+       * Asignar lista de tipos recurso
+       */
       fetch (api + '/tipo_recursos')
         .then(response => response.json() )
         .then(data => {
@@ -35,6 +49,9 @@
             }
         });
 
+      /*
+       * Asignar lista de trazabilidad
+       */
       fetch (api + '/trazabilidad/social')
         .then(response => response.json() )
         .then(data => {
@@ -58,12 +75,15 @@
     { tipos_recurso }
     { trazabilidad_social }
   />
+
   {location.href}
+
   <Router>
     <div class='main'>
       <Route path="" component={ SearchPage } />
     </div>
   </Router>
+
 </main>
 
 <style>

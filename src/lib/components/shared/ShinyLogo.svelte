@@ -1,4 +1,5 @@
 <script>
+  // exportar dependencias
   export let logoRecurso, logoTraza, logoEstilo;
 
   let src;
@@ -7,7 +8,6 @@
   else if (logoRecurso.urlArchivo)
     src = `${logoRecurso.urlArchivo}`;
   else src = '';
-  let a = 'initial';
 </script>
 
 <div

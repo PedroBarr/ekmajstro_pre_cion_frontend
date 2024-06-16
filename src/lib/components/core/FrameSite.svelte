@@ -1,8 +1,13 @@
 <script>
+  // exportar dependencias
   export let consigna;
   export let tipos_recurso = [];
   export let trazabilidad_social = [];
+
+  // importar componentes
   import CornerBar from './CornerBar.svelte';
+
+  // importar dependencias propias
   import { anchorFunction } from '../../services/shared/utils_web.js';
   import { assets } from '../../../assets/static/code/app.js';
 </script>
@@ -13,7 +18,6 @@
           funcionAludida: undefined,
           numOpciones: 3,
           posicion: 'nw',
-          rutaArchivosOpciones: '/icons/categorias/',
           seleccionActiva: true,
           color: '#d2b7f7',
       }}
@@ -23,7 +27,6 @@
       trazabilidad={{
           colorPrincipal: '#fa5a65aa',
           nombre: 'Ekmajstro Pre Cion',
-          // nombreArchivo: 'ekmajstro',
           urlArchivo: `${assets}/img/icons/core/ekmajstro.svg`,
           enlace: './',
           redirigir: true
@@ -41,7 +44,6 @@
           funcionAludida: anchorFunction,
           numOpciones: 4,
           posicion: 'ne',
-          rutaArchivosOpciones: '/icons/trazabilidad/',
           seleccionActiva: false,
           color: '#d2b7f7',
       }}
@@ -51,7 +53,6 @@
       trazabilidad={{
           colorPrincipal: '#01706cdd',
           nombre: 'Alta Lengua',
-          // nombreArchivo: 'al',
           urlArchivo: `${assets}/img/icons/core/al.svg`,
           enlace: './about',
           redirigir: true

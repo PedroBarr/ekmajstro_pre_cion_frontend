@@ -1,9 +1,11 @@
 <script>
+  // exportar dependencias
   export let trazabilidad, funcionalidad, opciones;
+
+  // importar componentes
   import ShinyLogo from '../shared/ShinyLogo.svelte';
 
   let posicion;
-
   let elementoInicial = 0, desfase = 0, centro = [50, 50];
 
   if (funcionalidad) {
@@ -35,14 +37,35 @@
   }
 
   function getStyleElemento (subindice) {
-    const rotacion = ((360 * subindice) / (funcionalidad.numOpciones * 4)) + desfase;
-    const torsion = (-360 / (funcionalidad.numOpciones * 4)) + 90;
-    const desfaseCentro = (
-        funcionalidad.numOpciones % 2 ?
-        (4 * (5 * funcionalidad.numOpciones)) / ((funcionalidad.numOpciones - 1) ** 2) :
-        (-2 * (5 * funcionalidad.numOpciones)) / funcionalidad.numOpciones / (-(funcionalidad.numOpciones / 2) + 1)) * subindice * (subindice - (funcionalidad.numOpciones - 1)
+    const rotacion = (
+      ((360 * subindice) / (funcionalidad.numOpciones * 4)) +
+      desfase
     );
-    return `--rotacion: ${rotacion}deg; --torsion: ${torsion}deg; --centroY: ${centro[1] + desfaseCentro}%; --centroX: ${centro[0] + desfaseCentro}%`;
+
+    const torsion = (-360 / (funcionalidad.numOpciones * 4)) + 90;
+
+    const desfaseCentro = (
+        (
+            funcionalidad.numOpciones % 2
+          ?
+            (4 * (5 * funcionalidad.numOpciones)) /
+            ((funcionalidad.numOpciones - 1) ** 2)
+          :
+            (-2 * (5 * funcionalidad.numOpciones)) /
+            funcionalidad.numOpciones /
+            (-(funcionalidad.numOpciones / 2) + 1)
+        ) *
+        subindice *
+        (subindice - (funcionalidad.numOpciones - 1)
+        )
+    );
+
+    return (
+      `--rotacion: ${rotacion}deg;` +
+      `--torsion: ${torsion}deg;` +
+      `--centroY: ${centro[1] + desfaseCentro}%;` +
+      `--centroX: ${centro[0] + desfaseCentro}%`
+    );
   }
 
 </script>
@@ -51,8 +74,16 @@
   <ul class="menuRadial" style="--color: {funcionalidad.color}">
     {#each [...opciones,...opciones].slice(elementoInicial, elementoInicial + funcionalidad.numOpciones) as opcion, indice}
       <li class="elemento" style={getStyleElemento(indice)}>
-        <button on:click={funcionalidad.funcionAludida(opcion.parametrosFuncionAludida)} class="subelemento" style={getStyleElemento(indice)}>
-          <img class="background" src={ opcion.nombreArchivo }/>
+        <button
+          on:click={funcionalidad.funcionAludida(opcion.parametrosFuncionAludida)}
+          class="subelemento"
+          style={getStyleElemento(indice)}
+        >
+          <img
+            class="background"
+            src={ opcion.nombreArchivo }
+            alt="Boton de fondo de esquina"
+          />
           <!--svelte:component this={ opcion.nombreArchivo } /-->
         </button>
       </li>
@@ -83,30 +114,49 @@
         }}
     />
   </div>
+
   {#if funcionalidad.seleccionActiva}
     <div class="panel-botones">
+
       {#if funcionalidad.numOpciones < opciones.length}
         <button
           class="boton-seguir"
           on:click={() => addElementoInicial(1)}
         >
+
           {#if (funcionalidad.posicion.toLowerCase().includes('n'))}
             {#if (funcionalidad.posicion.toLowerCase().includes('e'))}
-              <img class="boton_navegar_siguiente" src="icons/utils/chevron_up.svg" />
+              <img
+                class="boton_navegar_siguiente"
+                src="icons/utils/chevron_up.svg"
+                alt="Navegar siguiente ne"
+              />
             {/if}
 
             {#if (funcionalidad.posicion.toLowerCase().includes('w'))}
-              <img class="boton_navegar_siguiente" src="icons/utils/chevron_left.svg" />
+              <img
+                class="boton_navegar_siguiente"
+                src="icons/utils/chevron_left.svg"
+                alt="Navegar siguiente nw"
+              />
             {/if}
           {/if}
 
           {#if (funcionalidad.posicion.toLowerCase().includes('s'))}
             {#if (funcionalidad.posicion.toLowerCase().includes('e'))}
-              <img class="boton_navegar_siguiente" src="icons/utils/chevron_right.svg" />
+              <img
+                class="boton_navegar_siguiente"
+                src="icons/utils/chevron_right.svg"
+                alt="Navegar siguiente se"
+              />
             {/if}
 
             {#if (funcionalidad.posicion.toLowerCase().includes('w'))}
-              <img class="boton_navegar_siguiente" src="icons/utils/chevron_down.svg" />
+              <img
+                class="boton_navegar_siguiente"
+                src="icons/utils/chevron_down.svg"
+                alt="Navegar siguiente sw"
+              />
             {/if}
           {/if}
         </button>
@@ -116,25 +166,43 @@
         >
           {#if (funcionalidad.posicion.toLowerCase().includes('n'))}
             {#if (funcionalidad.posicion.toLowerCase().includes('e'))}
-              <img class="boton_navegar_siguiente" src="icons/utils/chevron_right.svg" />
+              <img
+                class="boton_navegar_siguiente"
+                src="icons/utils/chevron_right.svg"
+                alt="Navegar siguiente ne"
+              />
             {/if}
 
             {#if (funcionalidad.posicion.toLowerCase().includes('w'))}
-              <img class="boton_navegar_siguiente" src="icons/utils/chevron_up.svg" />
+              <img
+                class="boton_navegar_siguiente"
+                src="icons/utils/chevron_up.svg"
+                alt="Navegar siguiente nw"
+              />
             {/if}
           {/if}
 
           {#if (funcionalidad.posicion.toLowerCase().includes('s'))}
             {#if (funcionalidad.posicion.toLowerCase().includes('e'))}
-              <img class="boton_navegar_siguiente" src="icons/utils/chevron_down.svg" />
+              <img
+                class="boton_navegar_siguiente"
+                src="icons/utils/chevron_down.svg"
+                alt="Navegar siguiente se"
+              />
             {/if}
 
             {#if (funcionalidad.posicion.toLowerCase().includes('w'))}
-              <img class="boton_navegar_siguiente" src="icons/utils/chevron_left.svg" />
+              <img
+                class="boton_navegar_siguiente"
+                src="icons/utils/chevron_left.svg"
+                alt="Navegar siguiente sw"
+              />
             {/if}
           {/if}
+
         </button>
       {/if}
+
     </div>
   {/if}
 </div>
@@ -206,6 +274,7 @@
     translate: calc(200% / 3) calc(200% / 3);
   }
 
+  /*
   .top-corner .subelementos {
     -webkit-transform-origin-x: 50%;
   }
@@ -221,6 +290,7 @@
   .right-corner .subelementos {
     -webkit-transform-origin-y: 75%;
   }
+  */
 
 
 

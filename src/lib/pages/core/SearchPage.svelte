@@ -77,7 +77,7 @@
 
   .container {
     width: 100%;
-    height: fit-content;
+    /*height: fit-content;*/
     margin-top: 60px;
   }
 

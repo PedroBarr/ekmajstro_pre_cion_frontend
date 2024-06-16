@@ -28,7 +28,7 @@
           colorPrincipal: '#fa5a65aa',
           nombre: 'Ekmajstro Pre Cion',
           urlArchivo: `${assets}/img/icons/core/ekmajstro.svg`,
-          enlace: './',
+          enlace: '/',
           redirigir: true
       }}
   />
@@ -54,7 +54,7 @@
           colorPrincipal: '#01706cdd',
           nombre: 'Alta Lengua',
           urlArchivo: `${assets}/img/icons/core/al.svg`,
-          enlace: './about',
+          enlace: '/acerca_de',
           redirigir: true
       }}
   />

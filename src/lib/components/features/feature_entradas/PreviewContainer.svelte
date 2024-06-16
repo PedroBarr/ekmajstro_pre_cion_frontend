@@ -27,19 +27,25 @@
 
 <style>
   .preview-container-box {
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: row;
+    --espacio-intermedio: 10px;
+
     margin: 0;
+
+    width: 100%;
     max-width: 100%;
+    height: auto;
+
+    display: flex;
+    gap: var(--espacio-intermedio);
+
+    flex-direction: row;
     flex-wrap: wrap;
-    gap: 10px;
   }
 
   .preview-box-wrapper {
     width: 100%;
     height: auto;
+
     display: flex;
     flex-direction: row;
   }
@@ -49,10 +55,10 @@
   }
 
   .preview-box-wrapper.\32x1 {
-    width: calc(200% / 3);
+    width: calc((200% / 3) - (var(--espacio-intermedio) / 3));
   }
 
   .preview-box-wrapper.\31x1 {
-    width: calc(100% / 3);
+    width: calc((100% / 3) - (2 * var(--espacio-intermedio) / 3));
   }
 </style>

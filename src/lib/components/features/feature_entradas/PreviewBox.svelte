@@ -1,12 +1,15 @@
 <script lang='ts'>
+  // exportar dependencias
+  export let previsualizacion: PrevisualizacionEntrada;
+
+  // importar dependencias propias
   import {
     PrevisualizacionEntrada,
     PrevisualizacionAnuncio,
+    PrevisualizacionPrevisualizacion,
   } from '../../../models/previsualizacion.ts';
 
   import { anchorFunction } from '../../../services/shared/utils_web.js';
-
-  export let previsualizacion: PrevisualizacionEntrada;
 </script>
 
 <div class="preview-box">
@@ -17,17 +20,61 @@
           class="boton-cerrar"
           on:click={() => {}}
         >
-          <img class="icono_cerrar" src="icons/utils/x_mark.svg" />
+          <img
+            class="icono_cerrar"
+            src="icons/utils/x_mark.svg"
+            alt="Boton cerrar anuncio"
+          />
         </button>
 
         <button
           class="boton-continuar"
           on:click={() => anchorFunction(previsualizacion.enlace, false)}
         >
-          <img class="icono_continuar" src="icons/utils/play.svg" />
+          <img
+            class="icono_continuar"
+            src="icons/utils/play.svg"
+            alt="Boton seguir anuncio"
+          />
         </button>
 
-        <img class="anuncio-imagen" src={previsualizacion.imagen}/>
+        <img
+          class="anuncio-imagen"
+          src={previsualizacion.imagen}
+          alt="Imagen anuncio"
+        />
+      </div>
+    {/if}
+
+    {#if previsualizacion.tipo_entrada == 'PREVISUALIZACION'}
+      <div class="previsualizacion {previsualizacion.medida}">
+        <button
+          class="boton-cerrar"
+          on:click={() => {}}
+        >
+          <img
+            class="icono_cerrar"
+            src="icons/utils/x_mark.svg"
+            alt="Boton cerrar anuncio"
+          />
+        </button>
+
+        <button
+          class="boton-continuar"
+          on:click={() => anchorFunction(previsualizacion.enlace, false)}
+        >
+          <img
+            class="icono_continuar"
+            src="icons/utils/play.svg"
+            alt="Boton seguir anuncio"
+          />
+        </button>
+
+        <img
+          class="anuncio-imagen"
+          src={previsualizacion.imagen}
+          alt="Imagen anuncio"
+        />
       </div>
     {/if}
   {/if}

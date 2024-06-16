@@ -12,6 +12,7 @@
   import {
     PrevisualizacionEntrada,
     PrevisualizacionAnuncio,
+    PrevisualizacionPrevisualizacion,
   } from '../../models/previsualizacion.ts';
 
   let previsualizaciones: PrevisualizacionEntrada[] = [];
@@ -31,6 +32,20 @@
                   imagen: previsualizacion.anun_img,
                   enlace: previsualizacion.anun_enlace,
                 });
+
+                case 'PREVISUALIZACION': return (
+                  new PrevisualizacionPrevisualizacion({
+                    medida: previsualizacion.prev_medida,
+                    imagen: previsualizacion.prev_img,
+                    resumen: previsualizacion.prev_resumen,
+                    descripcion: previsualizacion.prev_descripcion,
+                    enlace: previsualizacion.prev_enlace,
+                    publicacion_id: previsualizacion.pblc_id,
+                    titulo: previsualizacion.pblc_titulo,
+                    etiquetas: previsualizacion.pblc_etiquetas,
+                    tipos_recurso: previsualizacion.pblc_tipos_recurso,
+                  })
+                );
 
                 default: return new PrevisualizacionEntrada();
               }

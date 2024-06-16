@@ -1,11 +1,15 @@
 <script lang='ts'>
+  // exportar dependencias
+  export let previsualizaciones: PrevisualizacionEntrada[];
+
+  // importar dependencias propias
   import {
     PrevisualizacionEntrada,
     PrevisualizacionAnuncio,
+    PrevisualizacionPrevisualizacion,
   } from '../../../models/previsualizacion.ts';
 
-  export let previsualizaciones: PrevisualizacionEntrada[];
-
+  // importar componentes
   import PreviewBox from './PreviewBox.svelte';
 </script>
 

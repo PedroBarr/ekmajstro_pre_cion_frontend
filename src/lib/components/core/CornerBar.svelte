@@ -5,6 +5,9 @@
   // importar componentes
   import ShinyLogo from '../shared/ShinyLogo.svelte';
 
+  // importar dependencias propias
+  import { base } from '../../../assets/static/code/app.js';
+
   let posicion;
   let elementoInicial = 0, desfase = 0, centro = [50, 50];
 
@@ -136,7 +139,7 @@
             {#if (funcionalidad.posicion.toLowerCase().includes('w'))}
               <img
                 class="boton_navegar_siguiente"
-                src="/icons/utils/chevron_left.svg"
+                src="{base}/icons/utils/chevron_left.svg"
                 alt="Navegar siguiente nw"
               />
             {/if}

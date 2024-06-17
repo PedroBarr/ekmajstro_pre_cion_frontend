@@ -14,3 +14,5 @@ export const api = enviroment === 'prod' ?
   'https://ekcion-api.up.railway.app/api' : 'http://localhost:8000/api';
 export const assets = enviroment === 'prod' ?
   'https://ekcion-api.up.railway.app/assets' : 'http://localhost:8000/assets';
+export const base = enviroment === 'prod' ?
+  'ekmajstro_pre_cion_frontend' : '';

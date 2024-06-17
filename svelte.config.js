@@ -11,8 +11,8 @@ export default {
     }),
     paths: {
       //base: ''
-      base: "/ekmajstro_pre_cion_frontend/",
-      //base: process.argv.includes('dev') ? '' : process.env.BASE_PATH
+      //base: "/ekmajstro_pre_cion_frontend/",
+      base: process.argv.includes('dev') ? '' : process.env.BASE_PATH
     }
   }
 }

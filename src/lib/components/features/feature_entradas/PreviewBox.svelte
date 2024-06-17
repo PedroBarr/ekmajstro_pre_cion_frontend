@@ -2,6 +2,9 @@
   // exportar dependencias
   export let previsualizacion: PrevisualizacionEntrada;
 
+  // importar componentes
+  import TagLineViewer from '../feature_publicacion/TagLineViewer.svelte';
+
   // importar dependencias propias
   import {
     PrevisualizacionEntrada,
@@ -149,6 +152,11 @@
               </button>
             </div>
           </div>
+
+          <TagLineViewer
+            etiquetas={previsualizacion.etiquetas}
+            numOpciones=1
+          />
         </div>
         {/if}
 
@@ -342,7 +350,7 @@
 
   .titulo-elemento {
     font-weight: 800;
-    font-size: 17px;
+    font-size: 19px;
     font-family: arial;
     color: #1f1d2a;
     letter-spacing: 1.5px;

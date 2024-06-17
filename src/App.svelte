@@ -76,8 +76,6 @@
     { trazabilidad_social }
   />
 
-  {location.href}
-
   <Router>
     <div class='main'>
       <Route path="" component={ SearchPage } />

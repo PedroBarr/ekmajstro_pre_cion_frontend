@@ -131,7 +131,7 @@
             {#if (funcionalidad.posicion.toLowerCase().includes('e'))}
               <img
                 class="boton_navegar_siguiente"
-                src="/icons/utils/chevron_up.svg"
+                src="{base}/icons/utils/chevron_up.svg"
                 alt="Navegar siguiente ne"
               />
             {/if}
@@ -149,7 +149,7 @@
             {#if (funcionalidad.posicion.toLowerCase().includes('e'))}
               <img
                 class="boton_navegar_siguiente"
-                src="/icons/utils/chevron_right.svg"
+                src="{base}/icons/utils/chevron_right.svg"
                 alt="Navegar siguiente se"
               />
             {/if}
@@ -157,7 +157,7 @@
             {#if (funcionalidad.posicion.toLowerCase().includes('w'))}
               <img
                 class="boton_navegar_siguiente"
-                src="/icons/utils/chevron_down.svg"
+                src="{base}/icons/utils/chevron_down.svg"
                 alt="Navegar siguiente sw"
               />
             {/if}
@@ -171,7 +171,7 @@
             {#if (funcionalidad.posicion.toLowerCase().includes('e'))}
               <img
                 class="boton_navegar_siguiente"
-                src="/icons/utils/chevron_right.svg"
+                src="{base}/icons/utils/chevron_right.svg"
                 alt="Navegar siguiente ne"
               />
             {/if}
@@ -179,7 +179,7 @@
             {#if (funcionalidad.posicion.toLowerCase().includes('w'))}
               <img
                 class="boton_navegar_siguiente"
-                src="/icons/utils/chevron_up.svg"
+                src="{base}/icons/utils/chevron_up.svg"
                 alt="Navegar siguiente nw"
               />
             {/if}
@@ -189,7 +189,7 @@
             {#if (funcionalidad.posicion.toLowerCase().includes('e'))}
               <img
                 class="boton_navegar_siguiente"
-                src="/icons/utils/chevron_down.svg"
+                src="{base}/icons/utils/chevron_down.svg"
                 alt="Navegar siguiente se"
               />
             {/if}
@@ -197,7 +197,7 @@
             {#if (funcionalidad.posicion.toLowerCase().includes('w'))}
               <img
                 class="boton_navegar_siguiente"
-                src="/icons/utils/chevron_left.svg"
+                src="{base}/icons/utils/chevron_left.svg"
                 alt="Navegar siguiente sw"
               />
             {/if}

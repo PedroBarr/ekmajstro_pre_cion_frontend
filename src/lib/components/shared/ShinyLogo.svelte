@@ -2,6 +2,9 @@
   // exportar dependencias
   export let logoRecurso, logoTraza, logoEstilo;
 
+  // importar dependencias propias
+  import { base } from '../../../assets/static/code/app.js';
+
   let src;
   if (logoRecurso.nombreArchivo)
     src = `/img/core/${logoRecurso.nombreArchivo}.svg`;
@@ -19,7 +22,7 @@
       style='--color:{logoEstilo.colores.primario}'
   >
     <a
-        href={logoTraza.enlace}
+        href="{base}{logoTraza.enlace}"
         rel="noreferrer"
         target={logoTraza.redirigir ? "_self" : "_blank"}
     >

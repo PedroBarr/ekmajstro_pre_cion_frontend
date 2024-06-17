@@ -87,9 +87,6 @@
 <style>
 
   .main {
-    /*position: fixed;
-    top: 0;
-    left: 0;*/
     margin: 60px 30px 0;
     width: calc(100% - 60px);
     height: auto;

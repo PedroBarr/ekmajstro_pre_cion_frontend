@@ -77,8 +77,8 @@
 
   .container {
     width: 100%;
-    /*height: fit-content;*/
     margin-top: 60px;
+    margin-bottom: 45px;
   }
 
   .search-box-wrapper {

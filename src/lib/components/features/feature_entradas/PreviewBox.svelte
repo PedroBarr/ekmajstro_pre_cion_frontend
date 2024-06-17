@@ -192,6 +192,10 @@
     height: fit-content;
   }
 
+  .previsualizacion {
+    margin-bottom: 20px;
+  }
+
   .anuncio {
     width: auto;
     height: auto;
@@ -290,7 +294,15 @@
   }
 
   .miniatura-imagen {
+    --border-width: 4px;
     border-radius: 15px;
+    border-style: inset;
+
+    border-width: var(--border-width);
+    width: calc(100% - 2 * var(--border-width));
+
+    border-color: #1f1d2a;
+    border-block: none;
   }
 
   .titulo-envoltura,

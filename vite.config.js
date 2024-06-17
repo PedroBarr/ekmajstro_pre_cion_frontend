@@ -5,7 +5,8 @@ import adapter from '@sveltejs/adapter-static';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [svelte()],
-  base: "./",
+  //base: "./",
+  base: "./ekmajstro_pre_cion_frontend/",
   kit: {
     adapter: adapter({
       fallback: '404.html'

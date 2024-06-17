@@ -4,6 +4,7 @@
 
   // importar componentes
   import TagLineViewer from '../feature_publicacion/TagLineViewer.svelte';
+  import TypeLineViewer from '../feature_publicacion/TypeLineViewer.svelte';
 
   // importar dependencias propias
   import {
@@ -156,6 +157,11 @@
           <TagLineViewer
             etiquetas={previsualizacion.etiquetas}
             numOpciones=1
+          />
+
+          <TypeLineViewer
+            tipos_recurso={previsualizacion.tipos_recurso}
+            numOpciones=3
           />
         </div>
         {/if}

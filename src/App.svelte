@@ -4,13 +4,14 @@
 
   // importar dependencias nativas
   import { onMount } from 'svelte';
-  import { Router, Route, Link, link } from 'svelte-routing';
+  import { Router, Route } from 'svelte-routing';
 
   // importar dependencias propias
   import { api } from './assets/static/code/app.js';
 
   // importar paginas
   import SearchPage from './lib/pages/core/SearchPage.svelte'
+  import PostPage from './lib/pages/core/PostPage.svelte'
 
   // variables
   let consigna = '';
@@ -79,6 +80,10 @@
   <Router>
     <div class='main'>
       <Route path="" component={ SearchPage } />
+
+      <Route path="/publicacion/:id" let:params>
+        <PostPage id="{params.id}" />
+      </Route>
     </div>
   </Router>
 

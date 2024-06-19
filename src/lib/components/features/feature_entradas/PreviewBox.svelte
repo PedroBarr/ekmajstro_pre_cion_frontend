@@ -362,17 +362,29 @@
   .titulo-elemento,
   .resumen-elemento,
   .descripcion-elemento {
-    font-family: Arial;
+    font-family: sans-serif;
     color: white;
+    text-align: justify;
+  }
+
+  .resumen-elemento,
+  .descripcion-elemento {
+    padding-right: 5px;
   }
 
   .titulo-elemento {
+    font-family: system-ui;
     font-weight: 800;
     font-size: 19px;
-    font-family: arial;
-    color: #1f1d2a;
-    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+    -webkit-text-stroke: medium;
+    letter-spacing: 3px;
     line-height: 1;
+
+    text-align: start;
+    color: #1f1d2a;
+
   }
 
 </style>

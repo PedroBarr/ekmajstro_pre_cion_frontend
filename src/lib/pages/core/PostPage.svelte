@@ -10,9 +10,10 @@
 
   // importar componentes
   import TagLineViewer from '../../components/features/feature_publicacion/TagLineViewer.svelte';
+  import PostSectionsContainer from '../../components/features/feature_publicacion/PostSectionsContainer.svelte';
 
 
-  let portada, etiquetas;
+  let portada, etiquetas, seccion_marcada, secciones;
 
   onMount(
     async ( ) => {
@@ -31,6 +32,22 @@
 
             if (data.etiquetas) {
               etiquetas = data.etiquetas;
+            }
+
+            if (
+              data.secciones &&
+              data.secciones.length &&
+              data.secciones.length > 0
+            ) {
+              secciones = [];
+
+              data.secciones.forEach((seccion: any) => {
+                if (seccion.secciones_marcadas_exists)
+                  seccion_marcada = seccion;
+                else
+                  secciones.push(seccion);
+              });
+
             }
           }
         });
@@ -58,6 +75,15 @@
       { etiquetas }
     />
   {/if}
+
+  <div class="publicacion-contenido">
+    {#if secciones || seccion_marcada}
+      <PostSectionsContainer
+        { seccion_marcada }
+        { secciones }
+      />
+    {/if}
+  </div>
 </div>
 
 <style>
@@ -84,5 +110,15 @@
   .imagen-portada {
     width: 100%;
     height: fit-content;
+  }
+
+  .publicacion-contenido {
+    width: 100%;
+    display: flex;
+    gap: 25px;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
   }
 </style>

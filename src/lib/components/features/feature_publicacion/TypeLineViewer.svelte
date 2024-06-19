@@ -17,7 +17,7 @@
 
 <div class="container-hilera">
   <button
-    on:click={addElementoInicial(-1)}
+    on:click={() => addElementoInicial(-1)}
     class="boton-navegar boton-anterior"
   >
     <img
@@ -45,7 +45,7 @@
   </ul>
 
   <button
-    on:click={addElementoInicial(1)}
+    on:click={() => addElementoInicial(1)}
     class="boton-navegar boton-siguiente"
   >
     <img

@@ -84,6 +84,10 @@
       <Route path="/publicacion/:id" let:params>
         <PostPage id="{params.id}" />
       </Route>
+
+      <Route path="/acerca_de">
+        <PostPage id="acerca_de" />
+      </Route>
     </div>
   </Router>
 

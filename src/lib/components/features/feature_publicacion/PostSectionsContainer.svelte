@@ -39,14 +39,17 @@
   {#if secciones && secciones_aperturas}
     {#each secciones as seccion}
       <div class="acordeon">
-        <div class="acordeon-cabecera">
+        <div
+          class="acordeon-cabecera"
+          on:click={() => conmutarApertura(seccion.secc_id)}
+          on:keypress={(e) => {e.stopPropagation()}}
+        >
           <div class="acordeon-cabecera-texto">
             {seccion.secc_nombre}
           </div>
 
           <button
             class="acordeon-cabecera-boton"
-            on:click={() => conmutarApertura(seccion.secc_id)}
           >
             {#if secciones_aperturas[seccion.secc_id]}
               <img
@@ -88,7 +91,6 @@
 
   .acordeon {
     width: 100%;
-    margin: 1rem 0;
   }
 
   .acordeon-cabecera {
@@ -104,7 +106,7 @@
     background-color: #fe6;
     border-radius: 5px;
 
-    padding: 5px var(--padding-sides);
+    padding: 10px var(--padding-sides);
   }
 
   .acordeon-cabecera-texto {

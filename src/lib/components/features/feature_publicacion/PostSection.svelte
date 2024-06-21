@@ -11,6 +11,63 @@
     return JSON.parse(segmento.segm_contenido);
   }
 
+  function obtenerClaseImagenSegm (segmento: any) {
+    return obtenerContenidoSegm(segmento).clase || '';
+  }
+  
+  function obtenerAlternativoImagenSegm (segmento: any) {
+    return obtenerTextoSegm(segmento, 'alternativo');
+  }
+  function obtenerClaseTextoSegm (segmento: any) {
+    return obtenerContenidoSegm(segmento).clase || '';
+  }
+  
+  function obtenerClaseListaSegm (segmento: any) {
+    return obtenerContenidoSegm(segmento).clase || '';
+  }
+
+  function corregirEntidades (texto: string): string {
+    return texto
+      .replaceAll('&Aacute;', '\u00C1')
+      .replaceAll('&aacute;', '\u00E1')
+      .replaceAll('&Eacute;', '\u00C9')
+      .replaceAll('&eacute;', '\u00E9')
+      .replaceAll('&Iacute;', '\u00CD')
+      .replaceAll('&iacute;', '\u00ED')
+      .replaceAll('&Oacute;', '\u00D3')
+      .replaceAll('&oacute;', '\u00F3')
+      .replaceAll('&Uacute;', '\u00DA')
+      .replaceAll('&uacute;', '\u00FA')
+      .replaceAll('&Ntilde;', '\u00D1')
+      .replaceAll('&ntilde;', '\u00F1')
+      .replaceAll('&Ccirc;', '\u0108')
+      .replaceAll('&ccirc;', '\u0109')
+      .replaceAll('&Gcirc;', '\u011C')
+      .replaceAll('&gcirc;', '\u011D')
+      .replaceAll('&iexcl;', '\u00A1')
+      .replaceAll('&iquest;', '\u00BF')
+      .replaceAll('\\n', '\n')
+      .replaceAll('\\t', '\t')
+    ;
+  }
+
+  function obtenerTextoSegm (
+    segmento: any,
+    clave_contenedor: string = 'contenido',
+  ) {
+    let contenido = obtenerContenidoSegm(segmento)[clave_contenedor] || '';
+    return corregirEntidades(contenido);
+  }
+  
+  function obtenerTituloSegm (segmento: any) {
+    return obtenerTextoSegm(segmento);
+  }
+  
+  function obtenerListaSegm (segmento: any) {
+    let contenido: string[] = obtenerContenidoSegm(segmento).contenido || [];
+    return contenido.map((elemento) => corregirEntidades(elemento));
+  }
+
   $: if (seccion) {
     segmentos = (seccion.segmentos || [])
       .sort((segmento_1: any, segmento_2: any) =>
@@ -24,35 +81,49 @@
   {#each segmentos as segmento}
     <div class={obtenerClaseSegm(segmento)}>
       {#if obtenerContenidoSegm(segmento).tipo == 'texto'}
-        <div class="segmento-contenido-texto">
-          {obtenerContenidoSegm(segmento).contenido}
+        <div class="segmento-contenido-texto {obtenerClaseTextoSegm(segmento)}">
+          {obtenerTextoSegm(segmento)}
         </div>
       {:else if obtenerContenidoSegm(segmento).tipo == 'imagen'}
-        <div class="segmento-contenido-imagen-envoltura">
+        <div class="segmento-contenido-imagen-envoltura {obtenerClaseImagenSegm(segmento)}">
           <img
-            class="segmento-contenido-imagen"
-            src={obtenerContenidoSegm(segmento).contenido}
-            alt="Imagen de la publicacion"
+          class="segmento-contenido-imagen"
+          src={obtenerContenidoSegm(segmento).contenido}
+          alt={obtenerAlternativoImagenSegm(segmento)}
           />
         </div>
-      {:else}
-        {obtenerContenidoSegm(segmento)}
-      {/if}
-    </div>
+        {:else if obtenerContenidoSegm(segmento).tipo == 'titulo'}
+        <div class="segmento-contenido-titulo">
+          {obtenerTituloSegm(segmento)}
+        </div>
+        {:else if obtenerContenidoSegm(segmento).tipo == 'lista'}
+        <div class="segmento-contenido-lista-envoltura {obtenerClaseListaSegm(segmento)}">
+          <ul class="segmento-contenido-lista-contenedor">
+            {#each obtenerListaSegm(segmento) as elemento}
+              <li class="segmento-contenido-lista-contenido">
+                {elemento}
+              </li>
+              {/each}
+            </ul>
+          </div>
+          {:else}
+          {obtenerContenidoSegm(segmento)}
+          {/if}
+        </div>
   {/each}
 </div>
 
 <style>
-
+  
   .segmento-contenedor {
     --gap: 10px;
 
     width: 100%;
     display: flex;
-
+    
     flex-direction: row;
     flex-wrap: wrap;
-
+    
     row-gap: 0px;
     column-gap: var(--gap);
   }
@@ -61,34 +132,122 @@
     --padding-sides: 10px;
     padding: 15px 10px;
   }
-
+  
   .segmento-contenido.\31-col {
     width: 100%;
   }
-
+  
   .segmento-contenido.\32-col {
     width: calc(50% - var(--gap) / 2 - var(--padding-sides) * 2);
   }
-
-  .segmento-contenido-texto {
+  
+  .segmento-contenido-titulo,
+  .segmento-contenido-texto,
+  .segmento-contenido-lista-contenido {
     width: 100%;
-
+    
     font-family: sans-serif;
     font-size: 15px;
-
+    
+    text-align: justify;
     color: white;
+    
+    white-space: break-spaces;
   }
-
-  .segmento-contenido-imagen-envoltura {
-    width: 100%;
+  
+  .segmento-contenido:has(> .segmento-contenido-imagen-envoltura) {
     display: flex;
-
     align-items: center;
     justify-content: center;
   }
-
+  
+  .segmento-contenido-imagen-envoltura {
+    width: 100%;
+    display: flex;
+    
+    align-items: center;
+    justify-content: center;
+  }
+  
   .segmento-contenido-imagen {
     max-width: 80%;
   }
+  
+  .segmento-contenido-imagen-envoltura.circ_img > * {
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  
+  .segmento-contenido-imagen-envoltura.med-medd > * {
+    width: 50%;
+  }
+  
+  .segmento-contenido-imagen-envoltura.peq-medd > * {
+    width: 25%;
+  }
+  
+  .segmento-contenido-titulo {
+    font-family: system-ui;
+    font-size: 15px;
+    text-transform: uppercase;
+    -webkit-text-stroke: medium;
+    letter-spacing: 1px;
+    text-align: center;
+  }
+  
+  .segmento-contenido-texto.vert-cent-texto {
+    text-align: center;
+  }
+  
+  *:has(> .segmento-contenido-texto.horiz-cent-texto) {
+    display: flex;
+    align-items: center;
+  }
 
-</style>
+  .segmento-contenido-lista-contenedor {
+    margin: 0;
+    padding: 0;
+  }
+
+  .segmento-contenido-lista-contenido {
+    list-style: none;
+    padding: 0 0 20px;
+    text-align: center;
+    position: relative;
+  }
+  
+  .segmento-contenido-lista-contenido:before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    
+    border-left-style: solid;
+    border-right-style: solid;
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-left-color: black;
+    border-right-color: black;
+    
+    left: 37.5%;
+    bottom: 0;
+    height: 50%;
+    width: 25%;
+    
+    background-image: url(http://localhost:8000/assets/img/icons/core/al.svg);
+    background-size: 100% 100%;
+    
+    filter: invert(0.5);
+    transform: scale(0.5);
+  }
+  
+  .segmento-contenido-lista-contenido:last-child:before {
+    content: none;
+    border-left-style: none;
+    border-right-style: none;
+  }
+
+  .segmento-contenido-lista-contenido:last-child {
+    padding: 0;
+  }
+  
+  </style>

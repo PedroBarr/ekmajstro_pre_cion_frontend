@@ -68,6 +68,9 @@
       />
     </button>
   </div>
+  {:else}
+    <div class="no-portada-caja">
+    </div>
   {/if}
 
   {#if etiquetas}
@@ -78,10 +81,10 @@
 
   <div class="publicacion-contenido">
     {#if secciones || seccion_marcada}
-      <PostSectionsContainer
-        { seccion_marcada }
-        { secciones }
-      />
+    <PostSectionsContainer
+      { seccion_marcada }
+      { secciones }
+    />
     {/if}
   </div>
 </div>
@@ -91,17 +94,19 @@
     width: 100%;
     margin-bottom: 45px;
   }
-
+  
   .portada-envoltura {
     width: 100%;
     height: 50vh;
     overflow: hidden;
-
+    
     display: flex;
     align-items: center;
   }
-
+  
   .boton-portada {
+    width: 100%;
+    
     border: none;
     padding: 0;
     cursor: grab;
@@ -116,9 +121,15 @@
     width: 100%;
     display: flex;
     gap: 25px;
-
+    
     flex-direction: column;
     align-items: center;
     justify-content: start;
+  }
+
+  .no-portada-caja {
+    display: block;
+    width: 100%;
+    height: 25vh;
   }
 </style>

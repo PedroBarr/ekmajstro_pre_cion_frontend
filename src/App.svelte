@@ -7,7 +7,7 @@
   import { Router, Route } from 'svelte-routing';
 
   // importar dependencias propias
-  import { api } from './assets/static/code/app.js';
+  import { api, base } from './assets/static/code/app.js';
 
   // importar paginas
   import SearchPage from './lib/pages/core/SearchPage.svelte'
@@ -81,11 +81,11 @@
     <div class='main'>
       <Route path="" component={ SearchPage } />
 
-      <Route path="/publicacion/:id" let:params>
+      <Route path="{base}/publicacion/:id" let:params>
         <PostPage id="{params.id}" />
       </Route>
 
-      <Route path="/acerca_de">
+      <Route path="{base}/acerca_de">
         <PostPage id="acerca_de" />
       </Route>
     </div>

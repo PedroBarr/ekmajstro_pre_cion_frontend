@@ -2,6 +2,9 @@
   // exportar dependencias
   export let seccion;
 
+  // exportar dependencias propias
+  import { base } from '../../../../assets/static/code/app';
+  
   let segmentos;
 
   const obtenerClaseSegm = (segmento: any) =>
@@ -67,7 +70,11 @@
     let contenido: string[] = obtenerContenidoSegm(segmento).contenido || [];
     return contenido.map((elemento) => corregirEntidades(elemento));
   }
-
+  
+  function obtenerSeparadorListaSegm (segmento: any) {
+    return obtenerTextoSegm(segmento, 'uri_separador');
+  }
+  
   $: if (seccion) {
     segmentos = (seccion.segmentos || [])
       .sort((segmento_1: any, segmento_2: any) =>
@@ -81,11 +88,15 @@
   {#each segmentos as segmento}
     <div class={obtenerClaseSegm(segmento)}>
       {#if obtenerContenidoSegm(segmento).tipo == 'texto'}
-        <div class="segmento-contenido-texto {obtenerClaseTextoSegm(segmento)}">
+        <div
+          class="segmento-contenido-texto {obtenerClaseTextoSegm(segmento)}"
+        >
           {obtenerTextoSegm(segmento)}
         </div>
       {:else if obtenerContenidoSegm(segmento).tipo == 'imagen'}
-        <div class="segmento-contenido-imagen-envoltura {obtenerClaseImagenSegm(segmento)}">
+        <div
+          class="segmento-contenido-imagen-envoltura {obtenerClaseImagenSegm(segmento)}"
+          >
           <img
           class="segmento-contenido-imagen"
           src={obtenerContenidoSegm(segmento).contenido}
@@ -97,7 +108,10 @@
           {obtenerTituloSegm(segmento)}
         </div>
         {:else if obtenerContenidoSegm(segmento).tipo == 'lista'}
-        <div class="segmento-contenido-lista-envoltura {obtenerClaseListaSegm(segmento)}">
+        <div
+          class="segmento-contenido-lista-envoltura {obtenerClaseListaSegm(segmento)}"
+          style="--recurso-separador: url({obtenerSeparadorListaSegm(segmento)});"
+        >
           <ul class="segmento-contenido-lista-contenedor">
             {#each obtenerListaSegm(segmento) as elemento}
               <li class="segmento-contenido-lista-contenido">
@@ -233,7 +247,7 @@
     height: 50%;
     width: 25%;
     
-    background-image: url(http://localhost:8000/assets/img/icons/core/al.svg);
+    background-image: var(--recurso-separador);
     background-size: 100% 100%;
     
     filter: invert(0.5);

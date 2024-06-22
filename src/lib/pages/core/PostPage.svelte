@@ -1,6 +1,7 @@
 <script lang='ts'>
   // exportar dependencias
   export let id;
+  export let setConsigna = (_: string) => {};
 
   // importar dependencias nativas
   import { onMount } from 'svelte';
@@ -17,17 +18,22 @@
 
   onMount(
     async ( ) => {
+      
       /*
-       * Obtener publicacion
-       */
-      fetch(api + '/entrada/' + id)
-        .then(response => response.json() )
-        .then(data => {
-          console.log(data);
-
-          if (data) {
-            if (data.portada) {
-              portada = data.portada;
+      * Obtener publicacion
+      */
+     fetch(api + '/entrada/' + id)
+     .then(response => response.json() )
+     .then(data => {
+       console.log(data);
+       
+      if (data) {
+        if (data.titulo) {
+         setConsigna('\u269E ' + data.titulo + ' \u269F');
+        }
+         
+        if (data.portada) {
+            portada = data.portada;
             }
 
             if (data.etiquetas) {

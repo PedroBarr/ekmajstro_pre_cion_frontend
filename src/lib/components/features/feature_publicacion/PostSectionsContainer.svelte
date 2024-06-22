@@ -95,18 +95,23 @@
 
   .acordeon-cabecera {
     --padding-sides: 10px;
+    padding: 10px var(--padding-sides);
+    
     width: calc(100% - 2 * var(--padding-sides));
     height: max-content;
     position: relative;
-
+    
     display: flex;
     justify-content: center;
     align-items: center;
-
+    
     background-color: #fe6;
     border-radius: 5px;
-
-    padding: 10px var(--padding-sides);
+  }
+  
+  .acordeon-cabecera,
+  .acordeon-cabecera * {
+    cursor: grab;
   }
 
   .acordeon-cabecera-texto {

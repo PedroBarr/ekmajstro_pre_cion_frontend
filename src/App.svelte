@@ -25,15 +25,6 @@
   onMount(
     async ( ) => {
       /*
-       * Actualizar consigna del sitio
-       */
-      fetch(api)
-        .then(response => response.json() )
-        .then(data => {
-          setConsigna('\u269E ' + data + ' \u269F');
-        });
-
-      /*
        * Asignar lista de tipos recurso
        */
       fetch (api + '/tipo_recursos')
@@ -79,14 +70,24 @@
 
   <Router>
     <div class='main'>
-      <Route path="" component={ SearchPage } />
-
-      <Route path="{base}/publicacion/:id" let:params>
-        <PostPage id="{params.id}" />
+      <Route path="">
+        <SearchPage
+          { setConsigna }
+        />
       </Route>
 
-      <Route path="{base}/acerca_de">
-        <PostPage id="acerca_de" />
+      <Route path="{base}/publicacion/:id" let:params>
+        <PostPage
+          id="{params.id}"
+          { setConsigna }
+          />
+        </Route>
+        
+        <Route path="{base}/acerca_de">
+          <PostPage
+          id="acerca_de"
+          { setConsigna }
+        />
       </Route>
     </div>
   </Router>

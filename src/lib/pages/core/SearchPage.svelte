@@ -1,4 +1,7 @@
 <script lang='ts'>
+  // exportar dependencias
+  export let setConsigna = (_: string) => {};
+
   // importar componentes
   import SearchBox from '../../components/core/SearchBox.svelte';
   import PreviewContainer from '../../components/features/feature_entradas/PreviewContainer.svelte';
@@ -13,12 +16,21 @@
     PrevisualizacionEntrada,
     PrevisualizacionAnuncio,
     PrevisualizacionPrevisualizacion,
-  } from '../../models/previsualizacion.ts';
+  } from '../../models/previsualizacion';
 
   let previsualizaciones: PrevisualizacionEntrada[] = [];
 
   onMount(
     async ( ) => {
+      /*
+      * Actualizar consigna del sitio
+      */
+      fetch(api)
+      .then(response => response.json() )
+      .then(data => {
+        setConsigna('\u269E ' + data + ' \u269F');
+      });
+
       fetch (api + '/entradas')
         .then(response => response.json() )
         .then(data => {

@@ -20,7 +20,7 @@
   }
 
   function obtenerAlternativoImagenSegm (segmento: any) {
-    return obtenerTextoSegm(segmento, 'alternativo');
+    return obtenerAlgoSegm(segmento, 'alternativo');
   }
   function obtenerClaseTextoSegm (segmento: any) {
     return obtenerContenidoSegm(segmento).clase || '';
@@ -30,7 +30,7 @@
     return obtenerContenidoSegm(segmento).clase || '';
   }
 
-  function obtenerTextoSegm (
+  function obtenerAlgoSegm (
     segmento: any,
     clave_contenedor: string = 'contenido',
   ) {
@@ -38,8 +38,17 @@
     return corregirEntidades(contenido);
   }
 
+  function obtenerTextoSegm (segmento: any) {
+    let contenido = obtenerAlgoSegm(segmento) || '';
+    return corregirEntidades(contenido);
+  }
+  
+  function obtenerIconoTextoSegm (segmento: any) {
+    return obtenerAlgoSegm(segmento, 'uri_icono');
+  }
+
   function obtenerTituloSegm (segmento: any) {
-    return obtenerTextoSegm(segmento);
+    return obtenerAlgoSegm(segmento);
   }
 
   function obtenerListaSegm (segmento: any) {
@@ -48,7 +57,49 @@
   }
 
   function obtenerSeparadorListaSegm (segmento: any) {
-    return obtenerTextoSegm(segmento, 'uri_separador');
+    return obtenerAlgoSegm(segmento, 'uri_separador');
+  }
+
+  function esTextoEnriquecidoTexto(segmento: any) {
+    return obtenerClaseTextoSegm(segmento).includes('rich-text');
+  }
+
+  function obtenerParteRicaTexto(
+    texto: string,
+    separador: string,
+    clase: string,
+    clase_prev: string,
+  ): any[] {
+    return (
+      (' ' + texto)
+        .split(separador)
+        .map((parte: string, indice: number) => {
+          let texto = indice == 0 ? parte.substring(1) : parte; // hace nada
+          
+          if (indice % 2)
+            return {
+              texto,
+              clase: clase_prev + ' ' + clase,
+            }
+          
+          return {
+            texto,
+            clase: clase_prev,
+          }
+        })
+    );
+  }
+
+  function obtenerPartesTextoSegm(segmento: any): any[] {
+    let texto: string = obtenerTextoSegm(segmento);
+    let partes_italica: any[] = obtenerParteRicaTexto(
+      texto,
+      '&estxit;',
+      'ital-texto',
+      '',
+    );
+    console.log(partes_italica);
+    return partes_italica;
   }
 
   $: if (seccion) {
@@ -66,8 +117,17 @@
       {#if obtenerContenidoSegm(segmento).tipo == 'texto'}
         <div
           class="segmento-contenido-texto {obtenerClaseTextoSegm(segmento)}"
+          style="--recurso-icono: url({obtenerIconoTextoSegm(segmento)});"
         >
-          {obtenerTextoSegm(segmento)}
+          {#if esTextoEnriquecidoTexto(segmento)}
+            {#each obtenerPartesTextoSegm(segmento) as parte_texto}
+              <span class={parte_texto.clase}>
+                {parte_texto.texto}
+              </span>
+            {/each}
+          {:else}
+            {obtenerTextoSegm(segmento)}
+          {/if}
         </div>
       {:else if obtenerContenidoSegm(segmento).tipo == 'imagen'}
         <div
@@ -119,7 +179,8 @@
   }
 
   .segmento-contenido {
-    --padding-sides: 10px;
+    --padding-right: 10px;
+    --padding-left: 10px;
     padding: 15px 10px;
   }
 
@@ -128,7 +189,7 @@
   }
 
   .segmento-contenido.\32-col {
-    width: calc(50% - var(--gap) / 2 - var(--padding-sides) * 2);
+    width: calc(50% - (var(--gap) / 2) - (var(--padding-right) + var(--padding-left)));
   }
 
   .segmento-contenido-titulo,
@@ -185,6 +246,16 @@
     text-align: center;
   }
 
+  .segmento-contenido-texto.negrt-texto,
+  .segmento-contenido-texto .negrt-texto {
+    font-weight: bold;
+  }
+  
+  .segmento-contenido-texto.ital-texto,
+  .segmento-contenido-texto .ital-texto {
+    font-style: italic;
+  }
+
   .segmento-contenido-texto.vert-cent-texto {
     text-align: center;
   }
@@ -206,7 +277,74 @@
     line-height: 1.4;
     letter-spacing: 1.1px;
   }
+  
+  *:has(> .segmento-contenido-texto.nota-texto) {
+    position: relative;
+    background-color: #d2b7f7;
+    
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    align-self: center;
+    
+    --border-right: 1px;
+    --border-left: 30px;
+    
+    border-color: #483d8b9a;
+    border-width: var(--border-right);
+    border-left-width: var(--border-left);
+    border-style: solid;
+    
+    --padding-right-inner: 20px;
+    --padding-left-inner: 5px;
+    --padding-left: calc(var(--padding-left-inner) + var(--border-left));
+    --padding-right: calc(var(--padding-right-inner) + var(--border-right));
+    
+    padding-right: var(--padding-right-inner);
+    padding-left: var(--padding-left-inner);
+    padding-top: 10px;
+    padding-bottom: calc(var(--padding-right-inner) * 2);
+    
+    border-top-left-radius: 5px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 20px;
+  }
+  
+  .segmento-contenido-texto.nota-texto {
+    color: black;
+    font-size: 11px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    
+    line-height: 1;
+    letter-spacing: 0.9px;
+  }
+  
+  .segmento-contenido-texto.nota-texto:before {
+    --width-space: 150px;
+    height: calc(var(--border-left) * 0.8);
+    width: calc(var(--border-left) * 0.8 + var(--width-space));
 
+    position: absolute;
+    z-index: 1;
+    left: calc(-1 * var(--border-left) + (var(--border-left) / 10));
+    top: 0;
+
+    content: 'NOTA';
+    transform: rotate(-90deg) translate(calc(-50% + var(--width-space) / 2), calc(var(--width-space) / -2));
+    
+    background-image: var(--recurso-icono);
+    background-size: 100% 100%;
+    
+    filter: brightness(0) invert(0.2);
+    
+    display: flex;
+    align-items: center;
+    
+    font-weight: 900;
+    font-size: 12px;
+  }
+  
   .segmento-contenido-lista-contenedor {
     margin: 0;
     padding: 0;

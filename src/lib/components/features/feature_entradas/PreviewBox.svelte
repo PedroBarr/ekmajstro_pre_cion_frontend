@@ -11,9 +11,10 @@
     PrevisualizacionEntrada,
     PrevisualizacionAnuncio,
     PrevisualizacionPrevisualizacion,
-  } from '../../../models/previsualizacion.ts';
+  } from '../../../models/previsualizacion';
 
-  import { anchorFunction } from '../../../services/shared/utils_web.js';
+  import { base } from '../../../../assets/static/code/app';
+  import { anchorFunction } from '../../../services/shared/utils_web';
 
   let extendido = false;
 
@@ -76,11 +77,11 @@
 
             <button
               class="boton-continuar"
-              on:click={() => anchorFunction(previsualizacion.enlace, false)}
+              on:click={() => anchorFunction(base + previsualizacion.enlace, false)}
             >
               <img
                 class="icono_continuar"
-                src="/icons/utils/play.svg"
+                src="{base}/icons/utils/play.svg"
                 alt="Boton seguir anuncio"
               />
             </button>
@@ -97,7 +98,7 @@
             >
               <img
                 class="icono_extender"
-                src="/icons/utils/chevron_down.svg"
+                src="{base}/icons/utils/chevron_down.svg"
                 alt="Boton extender previsualizacion"
               />
             </button>
@@ -118,7 +119,7 @@
             >
               <img
                 class="icono_continuar"
-                src="/icons/utils/play.svg"
+                src="{base}/icons/utils/play.svg"
                 alt="Boton seguir anuncio"
               />
             </button>
@@ -136,7 +137,7 @@
               >
                 <img
                   class="icono_extender"
-                  src="/icons/utils/chevron_up.svg"
+                  src="{base}/icons/utils/chevron_up.svg"
                   alt="Boton retraer previsualizacion"
                 />
               </button>
@@ -147,7 +148,7 @@
               >
                 <img
                   class="icono_prever"
-                  src="/icons/utils/preview.svg"
+                  src="{base}/icons/utils/preview.svg"
                   alt="Boton previsualizar"
                 />
               </button>

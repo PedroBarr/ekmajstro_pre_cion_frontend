@@ -3,6 +3,9 @@
   export let etiquetas = [];
   export let numOpciones = 3;
 
+  // importar dependencias propias
+  import { base } from '../../../../assets/static/code/app';
+
   let elementoInicial = 0;
 
   function addElementoInicial (salto) {
@@ -22,7 +25,7 @@
   >
     <img
       class="boton_navegar_anterior"
-      src="/icons/utils/chevron_left.svg"
+      src="{base}/icons/utils/chevron_left.svg"
       alt="Navegar anterior hilera"
     />
   </button>
@@ -46,7 +49,7 @@
   >
     <img
       class="boton_navegar_siguiente"
-      src="/icons/utils/chevron_right.svg"
+      src="{base}/icons/utils/chevron_right.svg"
       alt="Navegar siguiente hilera"
     />
   </button>

@@ -7,7 +7,7 @@
   import { Router, Route } from 'svelte-routing';
 
   // importar dependencias propias
-  import { api, base } from './assets/static/code/app.js';
+  import { api, base } from './assets/static/code/app';
 
   // importar paginas
   import SearchPage from './lib/pages/core/SearchPage.svelte'
@@ -82,7 +82,7 @@
           { setConsigna }
           />
         </Route>
-        
+
         <Route path="{base}/acerca_de">
           <PostPage
           id="acerca_de"

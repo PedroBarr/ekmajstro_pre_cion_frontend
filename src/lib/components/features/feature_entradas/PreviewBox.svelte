@@ -41,7 +41,7 @@
 
         <button
           class="boton-continuar"
-          on:click={() => anchorFunction(previsualizacion.enlace, false)}
+          on:click={() => anchorFunction(base + previsualizacion.enlace, false)}
         >
           <img
             class="icono_continuar"

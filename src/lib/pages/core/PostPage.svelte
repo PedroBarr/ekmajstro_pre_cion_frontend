@@ -2,19 +2,22 @@
   // exportar dependencias
   export let id;
   export let setConsigna = (_: string) => {};
-
+  
   // importar dependencias nativas
   import { onMount } from 'svelte';
+  import { bind } from 'svelte/internal';
 
   // importar dependencias propias
   import { api } from '../../../assets/static/code/app.js';
-
+  
   // importar componentes
   import TagLineViewer from '../../components/features/feature_publicacion/TagLineViewer.svelte';
   import PostSectionsContainer from '../../components/features/feature_publicacion/PostSectionsContainer.svelte';
+  import DialogImage from '../../components/features/feature_emergentes/DialogImage.svelte';
 
 
-  let portada, etiquetas, seccion_marcada, secciones;
+  let portada, etiquetas, seccion_marcada, secciones, titulo;
+  let emergente_apertura: boolean = false;
 
   onMount(
     async ( ) => {
@@ -27,36 +30,37 @@
      .then(data => {
        console.log(data);
        
-      if (data) {
-        if (data.titulo) {
-         setConsigna('\u269E ' + data.titulo + ' \u269F');
-        }
-         
-        if (data.portada) {
-            portada = data.portada;
-            }
-
-            if (data.etiquetas) {
-              etiquetas = data.etiquetas;
-            }
-
-            if (
-              data.secciones &&
-              data.secciones.length &&
-              data.secciones.length > 0
-            ) {
-              secciones = [];
-
-              data.secciones.forEach((seccion: any) => {
-                if (seccion.secciones_marcadas_exists)
-                  seccion_marcada = seccion;
-                else
-                  secciones.push(seccion);
-              });
-
-            }
+        if (data) {
+          if (data.titulo) {
+          titulo = data.titulo;
+          setConsigna('\u269E ' + titulo + ' \u269F');
           }
-        });
+          
+          if (data.portada) {
+              portada = data.portada;
+          }
+
+          if (data.etiquetas) {
+            etiquetas = data.etiquetas;
+          }
+
+          if (
+            data.secciones &&
+            data.secciones.length &&
+            data.secciones.length > 0
+          ) {
+            secciones = [];
+
+            data.secciones.forEach((seccion: any) => {
+              if (seccion.secciones_marcadas_exists)
+                seccion_marcada = seccion;
+              else
+                secciones.push(seccion);
+            });
+
+          }
+        }
+      });
     }
   );
 </script>
@@ -66,6 +70,7 @@
   <div class="portada-envoltura">
     <button
       class="boton-portada"
+      on:click={() => (emergente_apertura = true)}
     >
       <img
         alt="Portada de la publicacion "
@@ -73,6 +78,13 @@
         src={ portada }
       />
     </button>
+
+    <DialogImage
+      bind:emergente_apertura
+      imagen={ portada }
+      pie_imagen="Portada de la publicación {titulo}"
+    >
+    </DialogImage>
   </div>
   {:else}
     <div class="no-portada-caja">

@@ -2,9 +2,11 @@
   // exportar dependencias
   export let seccion;
 
-  // exportar dependencias propias
-  import { base } from '../../../../assets/static/code/app';
+  // importar dependencias propias
   import { corregirEntidades } from '../../../../assets/static/code/utils';
+  
+  // importar componentes
+  import PostImageSegment from './PostImageSegment.svelte';
 
   let segmentos;
 
@@ -15,13 +17,6 @@
     return JSON.parse(segmento.segm_contenido);
   }
 
-  function obtenerClaseImagenSegm (segmento: any) {
-    return obtenerContenidoSegm(segmento).clase || '';
-  }
-
-  function obtenerAlternativoImagenSegm (segmento: any) {
-    return obtenerAlgoSegm(segmento, 'alternativo');
-  }
   function obtenerClaseTextoSegm (segmento: any) {
     return obtenerContenidoSegm(segmento).clase || '';
   }
@@ -62,6 +57,10 @@
 
   function esTextoEnriquecidoTexto(segmento: any) {
     return obtenerClaseTextoSegm(segmento).includes('rich-text');
+  }
+  
+  function obtenerId(segmento: any) {
+    return segmento.segm_id || null;
   }
 
   function obtenerParteRicaTexto(
@@ -109,6 +108,7 @@
       )
     ;
   }
+
 </script>
 
 <div class="segmento-contenedor">
@@ -130,20 +130,16 @@
           {/if}
         </div>
       {:else if obtenerContenidoSegm(segmento).tipo == 'imagen'}
-        <div
-          class="segmento-contenido-imagen-envoltura {obtenerClaseImagenSegm(segmento)}"
-        >
-          <img
-            class="segmento-contenido-imagen"
-            src={obtenerContenidoSegm(segmento).contenido}
-            alt={obtenerAlternativoImagenSegm(segmento)}
-          />
-        </div>
-        {:else if obtenerContenidoSegm(segmento).tipo == 'titulo'}
+        <PostImageSegment
+          { segmento }
+          { obtenerContenidoSegm }
+          { obtenerAlgoSegm }
+        />
+      {:else if obtenerContenidoSegm(segmento).tipo == 'titulo'}
         <div class="segmento-contenido-titulo">
           {obtenerTituloSegm(segmento)}
         </div>
-        {:else if obtenerContenidoSegm(segmento).tipo == 'lista'}
+      {:else if obtenerContenidoSegm(segmento).tipo == 'lista'}
         <div
           class="segmento-contenido-lista-envoltura {obtenerClaseListaSegm(segmento)}"
           style="--recurso-separador: url({obtenerSeparadorListaSegm(segmento)});"
@@ -153,13 +149,13 @@
               <li class="segmento-contenido-lista-contenido">
                 {elemento}
               </li>
-              {/each}
-            </ul>
-          </div>
-          {:else}
-          {obtenerContenidoSegm(segmento)}
-          {/if}
+            {/each}
+          </ul>
         </div>
+      {:else}
+        {obtenerContenidoSegm(segmento)}
+      {/if}
+    </div>
   {/each}
 </div>
 
@@ -206,37 +202,12 @@
     white-space: break-spaces;
   }
 
-  .segmento-contenido:has(> .segmento-contenido-imagen-envoltura) {
+  .segmento-contenido:has(> PostImageSegment) {
     display: flex;
     align-items: center;
     justify-content: center;
   }
-
-  .segmento-contenido-imagen-envoltura {
-    width: 100%;
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-  }
-
-  .segmento-contenido-imagen {
-    max-width: 80%;
-  }
-
-  .segmento-contenido-imagen-envoltura.circ_img > * {
-    border-radius: 50%;
-    overflow: hidden;
-  }
-
-  .segmento-contenido-imagen-envoltura.med-medd > * {
-    width: 50%;
-  }
-
-  .segmento-contenido-imagen-envoltura.peq-medd > * {
-    width: 25%;
-  }
-
+  
   .segmento-contenido-titulo {
     font-family: system-ui;
     font-size: 15px;
@@ -391,4 +362,4 @@
     padding: 0;
   }
 
-  </style>
+</style>

@@ -58,7 +58,7 @@
         />
       </div>
     {/if}
-    
+
     {#if imagen && pie_imagen}
       <div
         class="pie-imagen-container"
@@ -94,7 +94,7 @@
 
 <style>
   .fondo-dialogo::backdrop {
-		background: rgba(0, 0, 0, 0.9);
+		background: #1a1f2af1;
     cursor: grab;
 	}
 
@@ -107,7 +107,7 @@
     padding: 0;
     border: none;
   }
-  
+
   .contenido-dialogo {
     /* height: 100%; */
     height: 75vh;
@@ -126,14 +126,14 @@
     justify-content: space-between;
     gap: 20px;
   }
-  
+
   .imagen-dialogo {
     width: auto;
     height: -webkit-fill-available;
 
     background-color: #d2b7f7;
   }
-  
+
   .imagen-envoltura {
     width: fit-content;
     height: -webkit-fill-available;
@@ -143,7 +143,7 @@
 
     border-width: 30px;
     border-style: solid;
-    
+
     border-image-source: var(--marco-url);
     border-image-slice: 20%;
     border-image-repeat: stretch;
@@ -164,16 +164,16 @@
 
     background-color: #f0f2b3;
     background-size: cover;
-    
+
     border-width: 9px;
     border-style: outset;
     border-radius: 50%;
     border-color: #db9151;
-    
+
     font-family: system-ui;
     font-variant: petite-caps;
     font-weight: 600;
-    
+
     color: #1e1e1e;
     text-shadow: 1px 1px #7b4a07, -1px -1px lightgray;
 
@@ -185,7 +185,7 @@
     rotate: 20deg;
     filter: grayscale(1) brightness(0.8);
   }
-  
+
   #icono-izquierdo {
     rotate: -20deg;
   }

@@ -41,6 +41,14 @@
   function obtenerIconoTextoSegm (segmento: any) {
     return obtenerAlgoSegm(segmento, 'uri_icono');
   }
+  
+  function obtenerEncabezadoTextoSegm (segmento: any) {
+    return obtenerAlgoSegm(segmento, 'encabezado') || 'NOTA';
+  }
+  
+  function obtenerMedidaEncabezadoTextoSegm (segmento: any) {
+    return obtenerEncabezadoTextoSegm(segmento).length;
+  }
 
   function obtenerTituloSegm (segmento: any) {
     return obtenerAlgoSegm(segmento);
@@ -57,10 +65,6 @@
 
   function esTextoEnriquecidoTexto(segmento: any) {
     return obtenerClaseTextoSegm(segmento).includes('rich-text');
-  }
-  
-  function obtenerId(segmento: any) {
-    return segmento.segm_id || null;
   }
 
   function obtenerParteRicaTexto(
@@ -117,7 +121,11 @@
       {#if obtenerContenidoSegm(segmento).tipo == 'texto'}
         <div
           class="segmento-contenido-texto {obtenerClaseTextoSegm(segmento)}"
-          style="--recurso-icono: url({obtenerIconoTextoSegm(segmento)});"
+          style="
+            --recurso-icono: url({obtenerIconoTextoSegm(segmento)});
+            --encabezado-texto: '{obtenerEncabezadoTextoSegm(segmento)}';
+            --encabezado-medida: {obtenerMedidaEncabezadoTextoSegm(segmento)};
+          "
         >
           {#if esTextoEnriquecidoTexto(segmento)}
             {#each obtenerPartesTextoSegm(segmento) as parte_texto}
@@ -292,16 +300,17 @@
   }
   
   .segmento-contenido-texto.nota-texto:before {
-    --width-space: 150px;
+    --font-size: 12px;
+    --width-space: calc((var(--font-size) + 3px) * var(--encabezado-medida) + 30px);
     height: calc(var(--border-left) * 0.8);
-    width: calc(var(--border-left) * 0.8 + var(--width-space));
+    width: calc(var(--border-left) * 0.9 + var(--width-space));
 
     position: absolute;
     z-index: 1;
     left: calc(-1 * var(--border-left) + (var(--border-left) / 10));
     top: 0;
 
-    content: 'NOTA';
+    content: var(--encabezado-texto);
     transform: rotate(-90deg) translate(calc(-50% + var(--width-space) / 2), calc(var(--width-space) / -2));
     
     background-image: var(--recurso-icono);
@@ -313,7 +322,9 @@
     align-items: center;
     
     font-weight: 900;
-    font-size: 12px;
+    font-size: var(--font-size);
+
+    text-transform: uppercase;
   }
   
   .segmento-contenido-lista-contenedor {

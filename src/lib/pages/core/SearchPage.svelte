@@ -10,7 +10,8 @@
   import { onMount } from 'svelte';
 
   // importar dependencias propias
-  import { api } from '../../../assets/static/code/app.js';
+  import { api } from '../../../assets/static/code/app';
+  import { corregirEntidades } from '../../../assets/static/code/utils';
 
   import {
     PrevisualizacionEntrada,
@@ -28,7 +29,7 @@
       fetch(api)
       .then(response => response.json() )
       .then(data => {
-        setConsigna('\u269E ' + data + ' \u269F');
+        setConsigna('\u269E ' + corregirEntidades(data) + ' \u269F');
       });
 
       fetch (api + '/entradas')

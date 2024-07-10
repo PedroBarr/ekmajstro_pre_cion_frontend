@@ -2,6 +2,7 @@ export const corregirEntidades = (texto) => {
   // https://www.toptal.com/designers/htmlarrows/letters/
 
   return texto
+    .replaceAll('&amp;', '&')
     .replaceAll('&#x22;', '\u0022')
     .replaceAll('&#x5E;', '\u005E')
     .replaceAll('&#x60;', '\u0060')

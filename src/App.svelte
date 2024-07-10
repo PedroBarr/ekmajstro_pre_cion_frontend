@@ -97,7 +97,8 @@
 <style>
 
   .main {
-    margin: 60px 30px 0;
+    --margin-main-sides: 30px;
+    margin: 60px var(--margin-main-sides) 0;
     width: calc(100% - 60px);
     height: auto;
   }

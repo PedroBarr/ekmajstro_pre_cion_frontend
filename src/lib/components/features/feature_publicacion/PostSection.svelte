@@ -288,6 +288,9 @@
     border-top-right-radius: 20px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 20px;
+
+    margin-top: 5px;
+    margin-bottom: 5px;
   }
   
   .segmento-contenido-texto.nota-texto {

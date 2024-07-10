@@ -14,9 +14,10 @@
   import TagLineViewer from '../../components/features/feature_publicacion/TagLineViewer.svelte';
   import PostSectionsContainer from '../../components/features/feature_publicacion/PostSectionsContainer.svelte';
   import DialogImage from '../../components/features/feature_emergentes/DialogImage.svelte';
+  import ResourceMenu from '../../components/features/feature_recursos/ResourceMenu.svelte';
 
 
-  let portada, etiquetas, seccion_marcada, secciones, titulo;
+  let portada, etiquetas, seccion_marcada, secciones, titulo, recursos;
   let emergente_apertura: boolean = false;
 
   onMount(
@@ -58,6 +59,20 @@
                 secciones.push(seccion);
             });
 
+          }
+
+          if (data.recursos) {
+            recursos = [];
+
+            data.recursos.forEach((recurso: any) => {
+              recursos.push({
+                titulo: recurso.rec_nombre,
+                descripcion: recurso.rec_descripcion,
+                especificacion: recurso.especificaciones.espc_descripcin,
+                tipo: recurso.tipos.tp_rec_diminutivo,
+                archivo: recurso.archivos.arch_uri,
+              });
+            })
           }
         }
       });
@@ -105,12 +120,19 @@
     />
     {/if}
   </div>
+  
+  {#if recursos && recursos.length}
+    <ResourceMenu
+      { recursos }
+    />
+  {/if}
 </div>
 
 <style>
   .container {
+    --margin-page-bottom: 65px;
     width: 100%;
-    margin-bottom: 45px;
+    margin-bottom: var(--margin-page-bottom);
   }
   
   .portada-envoltura {

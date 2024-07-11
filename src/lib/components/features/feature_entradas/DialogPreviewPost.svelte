@@ -4,6 +4,9 @@
   export let id: string = null;
   export let enlace: string = '';
 
+  // importar dependencias nativas
+  import { onMount } from 'svelte';
+
   // importar dependencias propias
   import { api, base } from '../../../../assets/static/code/app';
   import { anchorFunction } from '../../../services/shared/utils_web';
@@ -19,6 +22,7 @@
   let esquina_superior_derecha: string = "";
   let esquina_inferior_izquierda: string = "";
   let esquina_inferior_derecha: string = "";
+  let color_marco: string = "";
 
   let titulo: string = "";
   let portada: string = "";
@@ -74,6 +78,29 @@
     }
   };
 
+  onMount(
+    async ( ) => {
+      fetch(api + '/emergentes/previsualizacion')
+        .then(response => response.json() )
+        .then(data => {
+          console.log(data);
+
+          if (data) {
+            if (data.decoracion_url) {
+              esquina_superior_izquierda = data.decoracion_url;
+              esquina_superior_derecha = data.decoracion_url;
+              esquina_inferior_izquierda = data.decoracion_url;
+              esquina_inferior_derecha = data.decoracion_url;
+            }
+
+            if (data.icono_url) icono = data.icono_url;
+            if (data.color_marco) color_marco = data.color_marco;
+          }
+        })
+      ;
+    }
+  );
+
 	$: if (emergente && emergente_apertura == true && id) {
     emergente.showModal();
     cargarPrevisualizacion();
@@ -85,11 +112,54 @@
 	on:close={() => (emergente_apertura = false)}
 	on:click|self={() => emergente.close()}
   class="fondo-dialogo"
+  style="--color-decorado: {color_marco}"
 >
   <div
     on:click|stopPropagation
     class="contenido-dialogo"
   >
+    {#if esquina_superior_izquierda}
+      <img
+        class="esquina esquina-superior esquina-izquierda"
+        alt="Esquina superior izquierda"
+        src={ esquina_superior_izquierda }
+      />
+    {/if}
+    
+    {#if esquina_superior_derecha}
+      <img
+        class="esquina esquina-superior esquina-derecha"
+        alt="Esquina superior derecha"
+        src={ esquina_superior_derecha }
+      />
+    {/if}
+    
+    {#if icono}
+      <div class="icono-emergente-envoltura">
+        <img
+          class="icono-emergente"
+          alt="Icono emergente"
+          src={ icono }
+        />
+      </div>
+    {/if}
+
+    {#if esquina_inferior_izquierda}
+      <img
+        class="esquina esquina-inferior esquina-izquierda"
+        alt="Esquina inferior izquierda"
+        src={ esquina_inferior_izquierda }
+      />
+    {/if}
+    
+    {#if esquina_inferior_derecha}
+      <img
+        class="esquina esquina-inferior esquina-derecha"
+        alt="Esquina inferior derecha"
+        src={ esquina_inferior_derecha }
+      />
+    {/if}
+
     {#if titulo}
     <div class="previsualizacion-titulo-envoltura">
       <span class="previsualizacion-titulo">
@@ -126,7 +196,7 @@
             <span
               class="portada-titulo"
             >
-              Portada de publicación
+              Portada de la publicación
             </span>
 
             <div
@@ -141,7 +211,7 @@
           </div>
         {/if}
 
-        {#if etiquetas}
+        {#if etiquetas && etiquetas.length}
           <div class="parte-envoltura">
             <span class="parte-titulo">
               Etiquetas
@@ -160,7 +230,7 @@
           </div>
         {/if}
 
-        {#if secciones}
+        {#if secciones && secciones.length}
           <div class="parte-envoltura">
             <span class="parte-titulo">
               Secciones
@@ -179,7 +249,7 @@
           </div>
         {/if}
 
-        {#if recursos}
+        {#if recursos && recursos.length}
           <div class="parte-envoltura">
             <span class="parte-titulo">
               Recursos
@@ -209,15 +279,20 @@
 	}
 
   .fondo-dialogo {
-    --color-remarcado: var(--color-decorado, #ecd051);
+    --color-remarcado: var(--color-decorado);
+    --border-size: 15px;
+    --width-size: 90vw;
+    --height-size: 85vh;
 
-    width: 95vw;
-    height: 90vh;
+    width: var(--width-size);
+    height: var(--height-size);
 
     background-color: transparent;
 
     padding: 0;
     border: none;
+
+    overflow: unset;
   }
 
   .contenido-dialogo {
@@ -228,17 +303,15 @@
     flex-direction: column;
     row-gap: 10px;
 
-    /* flex-wrap: wrap; */
-
-    border-width: 15px;
+    border-width: var(--border-size);
     border-style: solid;
     border-color: var(--color-remarcado);
 
     background-color: #555;
 
     padding: 0 10px;
-    
-    /* overflow: overlay; */
+
+    position: relative;
   }
 
   .contenido-publicacion {
@@ -380,6 +453,62 @@
 
   .icono_continuar {
     height: -webkit-fill-available;
+  }
+
+  .esquina {
+    position: absolute;
+    
+    width: calc(var(--border-size) * 4);
+    height: calc(var(--border-size) * 4);
+
+    -webkit-transform: scaleX(var(--reflect-X)) scaleY(var(--reflect-Y));
+    transform: scaleX(var(--reflect-X)) scaleY(var(--reflect-Y));
+  }
+
+  .esquina-inferior {
+    --reflect-Y: 1;
+    bottom: calc(var(--border-size) * (-3));
+  }
+
+  .esquina-derecha {
+    --reflect-X: 1;
+    right: calc(var(--border-size) * (-3));
+  }
+  
+  .esquina-izquierda {
+    --reflect-X: -1;
+    left: calc(var(--border-size) * (-3));
+  }
+  
+  .esquina-superior {
+    --reflect-Y: -1;
+    top: calc(var(--border-size) * (-3));
+  }
+
+  .icono-emergente-envoltura {
+    --padding-icono: 5px;
+    padding: var(--padding-icono);
+
+    position: absolute;
+    bottom: calc((var(--border-size) * (-3)) + (var(--padding-icono) * (0)));
+    left: 50%;
+    right: 50%;
+
+
+    width: calc((var(--border-size) * 3) + (var(--padding-icono) * 2));
+    height: calc((var(--border-size) * 3) + (var(--padding-icono) * 2));
+
+    border-radius: 50%;
+    background-color: var(--color-remarcado);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .icono-emergente {
+    width: 80%;
+    filter: invert(0.5) brightness(0.5);
   }
   
   ::-webkit-scrollbar {

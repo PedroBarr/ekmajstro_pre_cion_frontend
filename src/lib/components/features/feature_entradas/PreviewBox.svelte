@@ -5,6 +5,7 @@
   // importar componentes
   import TagLineViewer from '../feature_publicacion/TagLineViewer.svelte';
   import TypeLineViewer from '../feature_publicacion/TypeLineViewer.svelte';
+  import DialogPreviewPost from './DialogPreviewPost.svelte';
 
   // importar dependencias propias
   import {
@@ -17,9 +18,14 @@
   import { anchorFunction } from '../../../services/shared/utils_web';
 
   let extendido = false;
+  let emergente_apertura = false;
 
-  function conmutar () {
+  function conmutarExtension () {
     extendido = !extendido;
+  }
+  
+  function conmutarAperturaEmergente () {
+    emergente_apertura = !emergente_apertura;
   }
 
 </script>
@@ -60,6 +66,12 @@
 
     {#if previsualizacion.tipo_entrada == 'PREVISUALIZACION'}
       <div class="previsualizacion {previsualizacion.medida}">
+        <DialogPreviewPost
+          bind:emergente_apertura
+          id={previsualizacion.get_id()}
+          enlace={previsualizacion.enlace}
+        />
+
         <div class="miniatura-envoltura">
           <img
             class="miniatura-imagen"
@@ -94,7 +106,7 @@
 
             <button
               class="boton-extender"
-              on:click={() => conmutar()}
+              on:click={() => conmutarExtension()}
             >
               <img
                 class="icono_extender"
@@ -133,7 +145,7 @@
             <div class="extension-acciones">
               <button
                 class="boton-extender"
-                on:click={() => conmutar()}
+                on:click={() => conmutarExtension()}
               >
                 <img
                   class="icono_extender"
@@ -147,6 +159,7 @@
                 on:click={() => {}}
               >
                 <img
+                  on:click={conmutarAperturaEmergente}
                   class="icono_prever"
                   src="{base}/icons/utils/preview.svg"
                   alt="Boton previsualizar"

@@ -61,18 +61,18 @@
 
           }
 
-          if (data.recursos) {
-            recursos = [];
-
-            data.recursos.forEach((recurso: any) => {
-              recursos.push({
-                titulo: recurso.rec_nombre,
-                descripcion: recurso.rec_descripcion,
-                especificacion: recurso.especificaciones.espc_descripcin,
-                tipo: recurso.tipos.tp_rec_diminutivo,
-                archivo: recurso.archivos.arch_uri,
-              });
-            })
+          if (
+            data.recursos &&
+            data.secciones.length &&
+            data.secciones.length > 0
+          ) {
+            recursos = data.recursos.map((recurso: any) => ({
+              titulo: recurso.rec_nombre,
+              descripcion: recurso.rec_descripcion,
+              especificacion: recurso.especificaciones.espc_descripcin,
+              tipo: recurso.tipos.tp_rec_diminutivo,
+              archivo: recurso.archivos.arch_uri,
+            }));
           }
         }
       });

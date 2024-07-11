@@ -44,6 +44,7 @@
 <style>
   .segmento-contenido-imagen-envoltura {
     width: 100%;
+    height: 100%;
     display: flex;
 
     align-items: center;
@@ -52,6 +53,7 @@
 
   .segmento-contenido-imagen-envoltura:not(.cuadro-exposicion) .segmento-contenido-imagen-boton {
     max-width: 80%;
+    /* width: -webkit-fill-available; */
   }
   
   .segmento-contenido-imagen {

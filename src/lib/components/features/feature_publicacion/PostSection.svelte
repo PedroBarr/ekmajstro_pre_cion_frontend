@@ -195,6 +195,10 @@
   .segmento-contenido.\32-col {
     width: calc(50% - (var(--gap) / 2) - (var(--padding-right) + var(--padding-left)));
   }
+  
+  .segmento-contenido.\33-col {
+    width: calc((100% / 3) - (var(--gap) / (3 / 2)) - (var(--padding-right) + var(--padding-left)));
+  }
 
   .segmento-contenido-titulo,
   .segmento-contenido-texto,

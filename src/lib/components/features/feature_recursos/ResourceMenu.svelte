@@ -101,6 +101,8 @@
     width: 50vw;
     max-height: 50vh;
     overflow-y: scroll;
+
+    padding-bottom: 10px;
   }
 
   .resource-menu-button-wrapper {

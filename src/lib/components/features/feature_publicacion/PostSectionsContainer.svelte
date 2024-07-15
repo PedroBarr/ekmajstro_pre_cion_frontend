@@ -68,11 +68,11 @@
         </div>
 
         {#if secciones_aperturas[seccion.secc_id]}
-        <div class="acordeon-contenedor" transition:slide>
-          <PostSection
-            { seccion }
-          />
-        </div>
+          <div class="acordeon-contenedor" transition:slide>
+            <PostSection
+              { seccion }
+            />
+          </div>
         {/if}
       </div>
     {/each}

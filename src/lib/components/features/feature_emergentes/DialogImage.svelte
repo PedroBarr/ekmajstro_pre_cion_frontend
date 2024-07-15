@@ -141,12 +141,14 @@
     margin-left: auto;
     margin-right: auto;
 
-    border-width: 30px;
+    border-width: 25px;
     border-style: solid;
 
     border-image-source: var(--marco-url);
-    border-image-slice: 20%;
-    border-image-repeat: stretch;
+    border-image-slice: calc(100% / 9);
+    border-image-repeat: space;
+    border-image-width: 15px;
+    border-image-outset: 1px;
 
     display: flex;
     justify-content: center;

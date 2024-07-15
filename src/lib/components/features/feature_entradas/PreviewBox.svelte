@@ -1,6 +1,6 @@
 <script lang='ts'>
   // exportar dependencias
-  export let previsualizacion: PrevisualizacionEntrada;
+  export let previsualizacion: PrevisualizacionEntrada, onClose;
 
   // importar componentes
   import TagLineViewer from '../feature_publicacion/TagLineViewer.svelte';
@@ -36,7 +36,9 @@
       <div class="anuncio {previsualizacion.medida}">
         <button
           class="boton-cerrar"
-          on:click={() => {}}
+          on:click={() => {
+            onClose(previsualizacion.get_id());
+          }}
         >
           <img
             class="icono_cerrar"
@@ -45,16 +47,16 @@
           />
         </button>
 
-        <button
+        <a
           class="boton-continuar"
-          on:click={() => anchorFunction(base + previsualizacion.enlace, false)}
+          href={base + previsualizacion.enlace}
         >
           <img
             class="icono_continuar"
             src="icons/utils/play.svg"
             alt="Boton seguir anuncio"
           />
-        </button>
+        </a>
 
         <img
           class="anuncio-imagen"
@@ -72,13 +74,16 @@
           enlace={previsualizacion.enlace}
         />
 
-        <div class="miniatura-envoltura">
+        <a 
+          class="miniatura-envoltura"
+          href={base + previsualizacion.enlace}
+        >
           <img
             class="miniatura-imagen"
             src={previsualizacion.imagen}
             alt="Imagen anuncio"
           />
-        </div>
+        </a>
 
         {#if !extendido}
         <div class="contenedor-datos resumido">
@@ -87,16 +92,16 @@
               {previsualizacion.titulo}
             </span>
 
-            <button
+            <a
               class="boton-continuar"
-              on:click={() => anchorFunction(base + previsualizacion.enlace, false)}
+              href={base + previsualizacion.enlace}
             >
               <img
                 class="icono_continuar"
                 src="{base}/icons/utils/play.svg"
                 alt="Boton seguir anuncio"
               />
-            </button>
+            </a>
           </div>
 
           <div class="resumen-envoltura">
@@ -125,16 +130,16 @@
               {previsualizacion.titulo}
             </span>
 
-            <button
+            <a
               class="boton-continuar"
-              on:click={() => anchorFunction(base + previsualizacion.enlace, false)}
+              href={base + previsualizacion.enlace}
             >
               <img
                 class="icono_continuar"
                 src="{base}/icons/utils/play.svg"
                 alt="Boton seguir anuncio"
               />
-            </button>
+            </a>
           </div>
 
           <div class="extension-envoltura">
@@ -187,6 +192,8 @@
 
 <style>
   .preview-box {
+    --medida-boton: 30px;
+
     position: relative;
     margin: 5px;
     padding: 5px 10px;
@@ -253,6 +260,8 @@
     position: absolute;
     top: 10px;
     right: 10px;
+
+    cursor: grab;
   }
 
   .anuncio.\31x1 .boton-cerrar {
@@ -262,14 +271,16 @@
     right: auto;
   }
 
+  .boton-continuar {
+    box-sizing: border-box;
+  }
+
   .boton-extender,
   .boton-prever,
   .boton-continuar {
-    padding: 5px 4px 3px 7px;
-
     background-color: #fe6;
     color: white;
-    cursor: pointer;
+    cursor: grab;
 
     border: none;
     border-radius: 50%;
@@ -282,6 +293,9 @@
     position: absolute;
     bottom: 10px;
     right: 10px;
+
+    padding: 6px !important;
+    padding-left: 11px !important;
   }
 
   .anuncio.\31x1 .boton-continuar {
@@ -289,10 +303,15 @@
   }
 
   .icono_prever,
+  .icono_extender,
   .icono_continuar {
-    width: calc(100% - 10px);
+    height: -webkit-fill-available;
   }
-
+  
+  .icono_extender {
+    width: -webkit-fill-available;
+  }
+  
   .contenedor-datos {
     display: flex;
     flex-direction: column;
@@ -303,8 +322,11 @@
   }
 
   .miniatura-envoltura {
+    display: block;
     margin-top: 10px;
     margin-bottom: 15px;
+
+    cursor: grab;
   }
 
   .miniatura-imagen {
@@ -322,19 +344,21 @@
   .titulo-envoltura,
   .resumen-envoltura,
   .extension-envoltura {
+    --resumen-desc-gap: 5px;
     display: flex;
     flex-direction: row;
 
-    gap: 5px;
+    gap: var(--resumen-desc-gap);
     justify-content: space-between;
     align-items: center;
   }
 
   .titulo-envoltura .boton-continuar {
-    padding: 4px 3px 2px 5px;
+    padding: 4px;
+    padding-left: 8px;
 
-    width: 30px;
-    height: 30px;
+    width: var(--medida-boton);
+    height: var(--medida-boton);
   }
 
   .resumen-envoltura,
@@ -358,19 +382,18 @@
   .resumen-envoltura .boton-extender,
   .extension-envoltura .boton-extender,
   .extension-envoltura .boton-prever {
-    padding: 4px 7px 2px 7px;
-
-    width: 35px;
-    height: 30px;
+    width: var(--medida-boton);
+    height: var(--medida-boton);
+    
   }
-
+  
+  .resumen-envoltura .boton-extender,
   .extension-envoltura .boton-extender {
-    width: 30px;
+    padding: 4px 5px !important;
   }
 
   .extension-envoltura .boton-prever {
-    padding: 7px 1px;
-    width: 30px;
+    padding: 5px 4px !important;
   }
 
   .titulo-elemento,
@@ -383,22 +406,25 @@
 
   .resumen-elemento,
   .descripcion-elemento {
-    padding-right: 5px;
+    --resumen-desc-padding-right: 5px;
+    padding-right: var(--resumen-desc-padding-right);
+    max-width: calc(100% - var(--medida-boton) - var(--resumen-desc-gap) - var(--resumen-desc-padding-right));
   }
-
+  
   .titulo-elemento {
     font-family: system-ui;
     font-weight: 800;
     font-size: 19px;
-
+    
     text-transform: uppercase;
     -webkit-text-stroke: medium;
     letter-spacing: 3px;
     line-height: 1;
-
+    
     text-align: start;
     color: #1f1d2a;
-
+    
+    max-width: calc(100% - var(--medida-boton) - var(--resumen-desc-gap));
   }
 
 </style>

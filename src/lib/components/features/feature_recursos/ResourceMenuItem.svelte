@@ -93,6 +93,10 @@
     background-color: var(--bgc);
     padding: var(--section-padding-v-sides);
   }
+  
+  .menu-item-tipo-imagen {
+    padding: var(--section-padding-v-sides) !important;
+  }
 
   .menu-item-tipo-container,
   .menu-item-action-wrapper {
@@ -135,6 +139,10 @@
     border-style: none;
     background-color: transparent;
     cursor: grab;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .menu-item-title,

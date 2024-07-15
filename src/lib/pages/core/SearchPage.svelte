@@ -44,6 +44,7 @@
                   medida: previsualizacion.anun_medida,
                   imagen: previsualizacion.anun_img,
                   enlace: previsualizacion.anun_enlace,
+                  anun_id: previsualizacion.anun_id,
                 });
 
                 case 'PREVISUALIZACION': return (

@@ -26,11 +26,13 @@ export class PrevisualizacionAnuncio extends PrevisualizacionEntrada {
 
   public imagen: string;
   public enlace: string;
+  public anun_id: string;
 
   constructor (obj: any = {}) {
     const {
       imagen = '',
       enlace = '/',
+      anun_id = '',
     } = obj;
 
     super(obj);
@@ -38,6 +40,7 @@ export class PrevisualizacionAnuncio extends PrevisualizacionEntrada {
     this.tipo_entrada = 'ANUNCIO';
     this.imagen = imagen;
     this.enlace = enlace;
+    this.anun_id = anun_id;
   }
 
   override ruta_enlace ( ): string {
@@ -45,7 +48,7 @@ export class PrevisualizacionAnuncio extends PrevisualizacionEntrada {
   }
 
   override get_id ( ): string {
-    return '';
+    return this.anun_id;
   }
 
 }

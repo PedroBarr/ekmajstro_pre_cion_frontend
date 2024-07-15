@@ -51,6 +51,10 @@
     justify-content: center;
   }
 
+  .segmento-contenido-imagen-boton {
+    cursor: grab;
+  }
+
   .segmento-contenido-imagen-envoltura:not(.cuadro-exposicion) .segmento-contenido-imagen-boton {
     max-width: 80%;
     /* width: -webkit-fill-available; */

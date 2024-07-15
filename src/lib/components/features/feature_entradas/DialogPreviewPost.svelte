@@ -331,12 +331,15 @@
 
     position: relative;
   }
-
+  
   .previsualizacion-principal-envoltura {
     width: 75%;
   }
+  
   .previsualizacion-detalles-envoltura {
     width: 25%;
+
+    padding-bottom: 20px;
   }
 
   .previsualizacion-principal-envoltura,

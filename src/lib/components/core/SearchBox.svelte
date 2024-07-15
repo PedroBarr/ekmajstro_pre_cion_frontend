@@ -109,29 +109,39 @@
   }
 
   .bottom-side-button {
-    display: inline-flex;
-    appearance: none;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    justify-content: center;
-    transition: all 250ms ease 0s;
-    user-select: none;
     position: relative;
+    
+    appearance: none;
+    background: #545a70;
+    
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+    
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    
+    transition: all 250ms ease 0s;
+    
+    user-select: none;
+    outline: none;
+    
     white-space: nowrap;
     vertical-align: middle;
-    outline: none;
-    width: auto;
     line-height: 1.2;
-    border-radius: 0.375rem;
-    font-weight: 600;
+    
+    width: auto;
     height: 2.5rem;
-    min-width: 2.5rem;
+    min-width: 75%;
+    
+    font-weight: 600;
     font-size: 1rem;
+    color: rgb(218, 218, 218);
+    
+    border-radius: 0.375rem;
+    
     padding-left: 1rem;
     padding-right: 1rem;
-    background: #545a70;
-    color: rgb(218, 218, 218);
   }
 
 </style>

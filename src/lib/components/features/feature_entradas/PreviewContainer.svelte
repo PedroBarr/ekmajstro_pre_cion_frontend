@@ -1,6 +1,20 @@
 <script lang='ts'>
   // exportar dependencias
   export let previsualizaciones: PrevisualizacionEntrada[];
+  
+  const vetados: string[] = [];
+
+  const add_vetados = (id_vetado: string) => {
+    vetados.push(id_vetado);
+    previsualizaciones.length += 0;
+  };
+
+  const is_renderable = (previsualizacion: PrevisualizacionEntrada) => {
+    return (
+      previsualizacion.tipo_entrada == 'PREVISUALIZACION' ||
+      !vetados.includes(previsualizacion.get_id())
+    );
+  }
 
   // importar dependencias propias
   import {
@@ -16,11 +30,14 @@
 <div class="preview-container-box">
   {#if previsualizaciones && previsualizaciones.length}
     {#each previsualizaciones as previsualizacion, indice}
-      <div class="preview-box-wrapper {previsualizacion.medida}">
-        <PreviewBox
-          { previsualizacion }
-        />
-      </div>
+      {#if is_renderable(previsualizacion)}
+        <div class="preview-box-wrapper {previsualizacion.medida}">
+          <PreviewBox
+            { previsualizacion }
+            onClose={add_vetados}
+          />
+        </div>
+      {/if}
     {/each}
   {/if}
 </div>

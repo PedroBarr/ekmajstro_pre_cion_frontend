@@ -95,14 +95,29 @@
 
   function obtenerPartesTextoSegm(segmento: any): any[] {
     let texto: string = obtenerTextoSegm(segmento);
+    const partes_texto = [];
+
     let partes_italica: any[] = obtenerParteRicaTexto(
       texto,
       '&estxit;',
       'ital-texto',
       '',
     );
-    console.log(partes_italica);
-    return partes_italica;
+
+    partes_italica.forEach((parte_italica) => {
+      let partes_negrita: any[] = obtenerParteRicaTexto(
+        parte_italica.texto,
+        '&estxbld;',
+        'bold-texto',
+        parte_italica.clase,
+      );
+console.log(partes_negrita);      
+      partes_negrita.forEach((parte_negrita) => {
+        partes_texto.push(parte_negrita);
+      });
+    });
+
+    return partes_texto;
   }
 
   $: if (seccion) {
@@ -199,6 +214,10 @@
   .segmento-contenido.\33-col {
     width: calc((100% / 3) - (var(--gap) / (3 / 2)) - (var(--padding-right) + var(--padding-left)));
   }
+  
+  .segmento-contenido.\34-col {
+    width: calc((100% / 4) - (var(--gap) / (4 / 3)) - (var(--padding-right) + var(--padding-left)));
+  }
 
   .segmento-contenido-titulo,
   .segmento-contenido-texto,
@@ -237,6 +256,11 @@
   .segmento-contenido-texto.ital-texto,
   .segmento-contenido-texto .ital-texto {
     font-style: italic;
+  }
+  
+  .segmento-contenido-texto.bold-texto,
+  .segmento-contenido-texto .bold-texto {
+    font-weight: bold;
   }
 
   .segmento-contenido-texto.vert-cent-texto {
@@ -378,6 +402,67 @@
 
   .segmento-contenido-lista-contenido:last-child {
     padding: 0;
+  }
+
+  *:has(> .segmento-contenido-texto.flyer-texto) {
+    background-color: #fdff9c;
+    
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    align-self: center;
+    
+    --border-right: 1px;
+    
+    border-color: #ffd000;
+    border-width: var(--border-right);
+    border-style: solid;
+    
+    --padding-inner: 20px;
+    
+    padding: var(--padding-inner);
+    padding-bottom: calc(var(--padding-inner) * 2);
+    
+    border-radius: 5px;
+
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .segmento-contenido-texto.flyer-texto {
+    position: relative;
+
+    color: black;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    
+    line-height: 1;
+    letter-spacing: 2px;
+    filter: drop-shadow(2px 4px 6px black);
+  }
+  
+  .segmento-contenido-texto.flyer-texto::before {
+    display: block;
+    content: "";
+    
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    
+    background-image: var(--recurso-icono);
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    width: -webkit-fill-available;
+    height: auto;
+
+    max-width: 75%;
+    margin: auto;
+    
+    filter: invert(0.5) opacity(0.2);
   }
 
 </style>

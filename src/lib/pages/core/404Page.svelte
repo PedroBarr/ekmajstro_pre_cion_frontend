@@ -35,7 +35,7 @@
       })
       .finally(() => {
         setTimeout(() => {
-          // retorno();
+          retorno();
         }, delta_redireccion);
       });
   });
@@ -45,7 +45,11 @@
   {#if url_icono}
   <div class="background">
     <div>
-      <img src={url_icono} alt="Icono de error" />
+      <img src={url_icono} alt="Icono de error" id="icono" on:load={() => {
+        setTimeout(() => {
+          document.querySelector('#icono').insertAdjacentHTML('afterend', '<span></span>');
+        }, 2);
+      }} />
     </div>
   </div>
   {/if}
@@ -67,10 +71,6 @@
 </div>
 
 <style>
-  /*
-  The style sheet must make the backgroud to be a layer background
-  and the content a layer over the background
-  */
   .container {
     display: flex;
     flex-direction: column;
@@ -165,6 +165,34 @@
     font-size: 0.6em;
     -webkit-text-stroke: thin;
     opacity: 0.4;
+  }
+
+  .background div:has(span) img {
+    --color-luz: #fa5a65aa;
+
+    animation: incrementarFactor 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    transition: --factor 1s;
+    filter: contrast(calc(1 * var(--factor))) blur(calc(10px * (1 - var(--factor)))) drop-shadow(-3px -3px calc(43px * var(--factor)) var(--color-luz));
+  }
+
+  @property --factor{
+    syntax: '<number>';
+    inherits: false;
+    initial-value: 0;
+  }
+
+  @keyframes incrementarFactor {
+
+    from {
+      --factor: 0;
+    }
+
+    to {
+      --factor: 1;
+    }
+
   }
 
 </style>

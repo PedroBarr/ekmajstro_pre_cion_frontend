@@ -21,7 +21,7 @@
     PrevisualizacionEntrada,
     PrevisualizacionAnuncio,
     PrevisualizacionPrevisualizacion,
-  } from '../../../models/previsualizacion.ts';
+  } from '../../../models/previsualizacion';
 
   // importar componentes
   import PreviewBox from './PreviewBox.svelte';

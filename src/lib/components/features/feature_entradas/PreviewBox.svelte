@@ -55,7 +55,7 @@
           on:click={(e) => {
             e.preventDefault();
             navigate(base + previsualizacion.enlace, { replace: false });
-          }}
+          }}  
         >
           <img
             class="icono_continuar"
@@ -73,7 +73,14 @@
     {/if}
 
     {#if previsualizacion.tipo_entrada == 'PREVISUALIZACION'}
-      <div class="previsualizacion {previsualizacion.medida}">
+      <div
+        class="previsualizacion
+        {previsualizacion.medida}"
+        on:dblclick={(e) => {
+          e.preventDefault();
+          conmutarAperturaEmergente();
+        }}
+      >
         <DialogPreviewPost
           bind:emergente_apertura
           id={previsualizacion.get_id()}

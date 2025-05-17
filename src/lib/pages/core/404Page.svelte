@@ -1,12 +1,15 @@
 <script lang='ts'>
+  // exportar dependencias
+  export let retorno = () => {};
+
   // importar dependencias nativas
   import { onMount } from 'svelte';
   
-  const delta_redireccion = 800;
+  const delta_redireccion: number = 800;
 
   onMount(() => {
     setTimeout(() => {
-      window.location.href = '/';
+      retorno();
     }, delta_redireccion);
   });
 </script>

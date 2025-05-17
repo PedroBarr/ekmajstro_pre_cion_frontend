@@ -23,6 +23,10 @@
     consigna = nuevaConsigna;
   }
 
+  function irAPagina(url = '/') {
+    window.location.href = url;
+  }
+
   onMount(
     async ( ) => {
       /*
@@ -92,7 +96,9 @@
       </Route>
       
       <Route default>
-        <Ignota />
+        <Ignota
+          retorno="{() => irAPagina()}"
+        />
       </Route>
     </div>
   </Router>

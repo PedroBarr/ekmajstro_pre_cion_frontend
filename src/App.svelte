@@ -85,7 +85,7 @@
         <PostPage
           id="{params.id}"
           { setConsigna }
-          trazaIgnota="{() => irAPagina('/404')}"
+          trazaIgnota="{() => irAPagina(base + '/404')}"
         />
       </Route>
 

@@ -12,6 +12,7 @@
   // importar paginas
   import SearchPage from './lib/pages/core/SearchPage.svelte'
   import PostPage from './lib/pages/core/PostPage.svelte'
+  import Ignota from './lib/pages/core/404Page.svelte'
 
   // variables
   let consigna = '';
@@ -70,7 +71,7 @@
 
   <Router>
     <div class='main'>
-      <Route path="">
+      <Route path="/">
         <SearchPage
           { setConsigna }
         />
@@ -80,14 +81,18 @@
         <PostPage
           id="{params.id}"
           { setConsigna }
-          />
-        </Route>
+        />
+      </Route>
 
-        <Route path="{base}/acerca_de">
-          <PostPage
+      <Route path="{base}/acerca_de">
+        <PostPage
           id="acerca_de"
           { setConsigna }
         />
+      </Route>
+      
+      <Route default>
+        <Ignota />
       </Route>
     </div>
   </Router>

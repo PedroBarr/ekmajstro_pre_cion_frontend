@@ -7,6 +7,9 @@
   import TypeLineViewer from '../feature_publicacion/TypeLineViewer.svelte';
   import DialogPreviewPost from './DialogPreviewPost.svelte';
 
+  // importar dependencias nativas
+  import { navigate } from 'svelte-routing';
+
   // importar dependencias propias
   import {
     PrevisualizacionEntrada,
@@ -49,7 +52,10 @@
 
         <a
           class="boton-continuar"
-          href={base + previsualizacion.enlace}
+          on:click={(e) => {
+            e.preventDefault();
+            navigate(base + previsualizacion.enlace, { replace: false });
+          }}
         >
           <img
             class="icono_continuar"
@@ -76,7 +82,10 @@
 
         <a 
           class="miniatura-envoltura"
-          href={base + previsualizacion.enlace}
+          on:click={(e) => {
+            e.preventDefault();
+            navigate(base + previsualizacion.enlace, { replace: false });
+          }}
         >
           <img
             class="miniatura-imagen"
@@ -94,7 +103,10 @@
 
             <a
               class="boton-continuar"
-              href={base + previsualizacion.enlace}
+              on:click={(e) => {
+                e.preventDefault();
+                navigate(base + previsualizacion.enlace, { replace: false });
+              }}
             >
               <img
                 class="icono_continuar"
@@ -132,7 +144,10 @@
 
             <a
               class="boton-continuar"
-              href={base + previsualizacion.enlace}
+              on:click={(e) => {
+                e.preventDefault();
+                navigate(base + previsualizacion.enlace, { replace: false });
+              }}
             >
               <img
                 class="icono_continuar"

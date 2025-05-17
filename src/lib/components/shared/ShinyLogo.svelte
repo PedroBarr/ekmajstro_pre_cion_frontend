@@ -2,6 +2,9 @@
   // exportar dependencias
   export let logoRecurso, logoTraza, logoEstilo;
 
+  // importar dependencias nativas
+  import { navigate } from "svelte-routing";
+
   // importar dependencias propias
   import { base } from '../../../assets/static/code/app.js';
 
@@ -22,9 +25,15 @@
       style='--color:{logoEstilo.colores.primario}'
   >
     <a
-        href="{base}{logoTraza.enlace}"
         rel="noreferrer"
-        target={logoTraza.redirigir ? "_self" : "_blank"}
+        on:click={(e) => {
+          e.preventDefault();
+          if (logoTraza.redirigir) {
+            navigate(`${base}${logoTraza.enlace}`, { replace: false });
+          } else {
+            window.open(`${base}${logoTraza.enlace}`, "_blank");
+          }
+        }}
     >
       <img
         style='--color:{logoEstilo.colores.secundario}; --colorPrincipal:{logoRecurso.colorPrincipal}'

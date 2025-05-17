@@ -4,7 +4,7 @@
 
   // importar dependencias nativas
   import { onMount } from 'svelte';
-  import { Router, Route } from 'svelte-routing';
+  import { Router, Route, navigate } from 'svelte-routing';
 
   // importar dependencias propias
   import { api, base } from './assets/static/code/app';
@@ -24,7 +24,7 @@
   }
 
   function irAPagina(url = base + "/") {
-    window.location.href = url;
+    navigate(url, { replace: false });
   }
 
   onMount(

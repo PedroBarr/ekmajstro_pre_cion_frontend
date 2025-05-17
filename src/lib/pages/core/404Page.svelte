@@ -4,6 +4,9 @@
 
   // importar dependencias nativas
   import { onMount } from 'svelte';
+
+  // importar dependencias propias
+  import { api } from '../../../assets/static/code/app.js';
   
   const delta_redireccion: number = 800;
   let url_icono: string;
@@ -11,38 +14,53 @@
   let mensaje: string;
   const descripcion: string = "En un momento serás redirigido a la página principal.";
 
-  const fakeAPI ={
-    "error": "404",
-    "titulo": "P&aacute;gina ignota",
-    "mensaje": "Error 404: P&aacute;gina no encontrada",
-    "icono": "http://localhost:8000/assets/img/icons/core/ekmajstro.svg",
-    "descripcion": "La p&aacute;gina que buscas no existe o no se encuentra disponible. Si crees que esto es un error, por favor contacta al administrador del sitio."
-  };
-
   onMount(() => {
-    // Simulando una llamada a la API
-    url_icono = fakeAPI.icono;
-    titulo = fakeAPI.mensaje;
-    mensaje = fakeAPI.descripcion;
-    
-    setTimeout(() => {
-      // retorno();
-    }, delta_redireccion);
+    fetch(api + '/404')
+      .then(response => response.json())
+      .then(data => {
+        if (data) {
+          if (data.icono) {
+            url_icono = data.icono;
+          }
+          if (data.titulo) {
+            titulo = data.mensaje;
+          }
+          if (data.mensaje) {
+            mensaje = data.descripcion;
+          }
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching 404 data:', error);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          // retorno();
+        }, delta_redireccion);
+      });
   });
 </script>
 
 <div class="container">
+  {#if url_icono}
   <div class="background">
     <div>
       <img src={url_icono} alt="Icono de error" />
     </div>
   </div>
+  {/if}
   <div class="content">
     <div class="title">
+      {#if titulo}
       <h1>{titulo}</h1>
+      {:else}
+      <h1>404</h1>
+      {/if}
     </div>
     <div class="message">
+      {#if mensaje}
       <p>{mensaje}</p>
+      {/if}
       <span>{descripcion}</span>
     </div>
   </div>

@@ -2,6 +2,7 @@
   // exportar dependencias
   export let id;
   export let setConsigna = (_: string) => {};
+  export let trazaIgnota = () => {};
   
   // importar dependencias nativas
   import { onMount } from 'svelte';
@@ -75,6 +76,10 @@
             }));
           }
         }
+      })
+      .catch((error) => {
+        console.error('Error al obtener la publicación:', error);
+        trazaIgnota();
       });
     }
   );

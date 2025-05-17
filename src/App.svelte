@@ -23,7 +23,7 @@
     consigna = nuevaConsigna;
   }
 
-  function irAPagina(url = '/') {
+  function irAPagina(url = base + "/") {
     window.location.href = url;
   }
 
@@ -75,7 +75,7 @@
 
   <Router>
     <div class='main'>
-      <Route path="/">
+      <Route path="{base}/">
         <SearchPage
           { setConsigna }
         />

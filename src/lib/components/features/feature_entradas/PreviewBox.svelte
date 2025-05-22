@@ -20,8 +20,12 @@
   import { base } from '../../../../assets/static/code/app';
   import { anchorFunction } from '../../../services/shared/utils_web';
 
+  const DURACION_MANTENIDO = 300;
+
   let extendido = false;
   let emergente_apertura = false;
+
+  let es_mantenido = false;
 
   function conmutarExtension () {
     extendido = !extendido;
@@ -29,6 +33,14 @@
   
   function conmutarAperturaEmergente () {
     emergente_apertura = !emergente_apertura;
+  }
+
+  function activarMantenido () {
+    es_mantenido = true;
+  }
+
+  function desactivarMantenido () {
+    es_mantenido = false;
   }
 
 </script>
@@ -89,9 +101,23 @@
 
         <a 
           class="miniatura-envoltura"
+          on:mousedown={(e) => {
+            e.preventDefault();
+            activarMantenido();
+
+            setTimeout(() => {
+              if (es_mantenido) {
+                conmutarAperturaEmergente();
+                es_mantenido = false;
+              }
+            }, DURACION_MANTENIDO);
+          }}
           on:click={(e) => {
             e.preventDefault();
             navigate(base + previsualizacion.enlace, { replace: false });
+          }}
+          on:mouseup={() => {
+            desactivarMantenido();
           }}
         >
           <img

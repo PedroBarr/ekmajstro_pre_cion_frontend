@@ -115,4 +115,12 @@
     height: auto;
   }
 
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .main {
+      --margin-main-sides: 10px;
+      width: calc(100% - 20px);
+    }
+  }
+
 </style>

@@ -78,4 +78,14 @@
   .preview-box-wrapper.\31x1 {
     width: calc((100% / 3) - (2 * var(--espacio-intermedio) / 3));
   }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .preview-box-wrapper.\33x1,
+    .preview-box-wrapper.\32x1,
+      .preview-box-wrapper.\31x1 {
+      width: 100%;
+    }
+    
+  }
 </style>

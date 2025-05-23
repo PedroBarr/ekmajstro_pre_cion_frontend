@@ -110,4 +110,22 @@
     justify-content: center;
   }
 
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .container {
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+    
+    .search-box-wrapper {
+      height: auto;
+      margin-top: 30px;
+    }
+
+    .search-box-inner {
+      width: 100%;
+      height: auto;
+    }
+  }
+
 </style>

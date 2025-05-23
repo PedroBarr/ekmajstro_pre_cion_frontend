@@ -64,10 +64,11 @@
 
         <a
           class="boton-continuar"
+          href=null
           on:click={(e) => {
             e.preventDefault();
             navigate(base + previsualizacion.enlace, { replace: false });
-          }}  
+          }}
         >
           <img
             class="icono_continuar"
@@ -101,6 +102,7 @@
 
         <a 
           class="miniatura-envoltura"
+          href=null
           on:mousedown={(e) => {
             e.preventDefault();
             activarMantenido();
@@ -136,6 +138,7 @@
 
             <a
               class="boton-continuar"
+              href=null
               on:click={(e) => {
                 e.preventDefault();
                 navigate(base + previsualizacion.enlace, { replace: false });
@@ -177,6 +180,7 @@
 
             <a
               class="boton-continuar"
+              href=null
               on:click={(e) => {
                 e.preventDefault();
                 navigate(base + previsualizacion.enlace, { replace: false });
@@ -213,6 +217,7 @@
               >
                 <img
                   on:click={conmutarAperturaEmergente}
+                  on:keydown|self={conmutarAperturaEmergente}
                   class="icono_prever"
                   src="{base}/icons/utils/preview.svg"
                   alt="Boton previsualizar"
@@ -275,11 +280,11 @@
     position: relative;
   }
 
-  .anuncio.\33x1 {
+  /* .anuncio.\33x1 {
   }
 
   .anuncio.\32x1 {
-  }
+  } */
 
   .anuncio.\31x1 {
     height: 100%;

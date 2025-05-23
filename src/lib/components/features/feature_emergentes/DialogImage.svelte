@@ -40,10 +40,16 @@
 	bind:this={emergente}
 	on:close={() => (emergente_apertura = false)}
 	on:click|self={() => emergente.close()}
+  on:keydown|self={(e) => {
+    if (e.key === 'Escape') {
+      emergente.close();
+    }
+  }}
   class="fondo-dialogo"
   >
   <div
     on:click|stopPropagation
+    on:keydown|stopPropagation
     class="contenido-dialogo"
     >
     {#if imagen}

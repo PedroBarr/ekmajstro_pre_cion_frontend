@@ -113,11 +113,17 @@
 	bind:this={emergente}
 	on:close={() => (emergente_apertura = false)}
 	on:click|self={() => emergente.close()}
+  on:keydown|self={(e) => {
+    if (e.key === 'Escape') {
+      emergente.close();
+    }
+  }}
   class="fondo-dialogo"
   style="--color-decorado: {color_marco}"
 >
   <div
     on:click|stopPropagation
+    on:keydown|stopPropagation
     class="contenido-dialogo"
   >
     {#if esquina_superior_izquierda}
@@ -440,8 +446,8 @@
     list-style-type: disc;
   }
 
-  .parte-etiqueta::marker {
-  }
+  /* .parte-etiqueta::marker {
+  } */
 
   .boton-continuar {
     padding: 5px 4px 3px 7px;

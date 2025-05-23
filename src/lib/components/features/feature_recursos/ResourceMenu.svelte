@@ -30,13 +30,27 @@
     <div
       class="resource-menu-backdrop"
       on:click={toggleMenu}
+      on:keydown|self={(e) => {
+        if (e.key === 'Escape') {
+          toggleMenu(e);
+        }
+      }}
     />
   {/if}
 
-  <div class="resource-menu-wrapper" on:click={toggleMenu}>
+  <div
+    class="resource-menu-wrapper"
+    on:click={toggleMenu}
+    on:keydown|self={(e) => {
+      if (e.key === 'Escape') {
+        toggleMenu(e);
+      }
+    }}
+  >
       {#if menu_apertura}
         <div
           on:click={noPropagEvent}
+          on:keydown|self|stopPropagation
           class="resource-menu-items-wrapper"
         >
           {#each recursos as recurso}

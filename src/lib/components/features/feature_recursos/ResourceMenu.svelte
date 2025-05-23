@@ -141,4 +141,16 @@
     display: none;
   }
 
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .resource-menu-wrapper {
+      bottom: calc(var(--margin-main-sides) / 2);
+      right: calc(var(--margin-main-sides) / 2);
+    }
+
+    .resource-menu-items-wrapper {
+      width: 90vw;
+    }
+  }
+
 </style>

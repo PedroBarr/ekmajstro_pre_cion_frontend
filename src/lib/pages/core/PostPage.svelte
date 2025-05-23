@@ -177,4 +177,19 @@
     width: 100%;
     height: 25vh;
   }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .container {
+      --margin-page-bottom: 30px;
+    }
+
+    .portada-envoltura {
+      height: 20vh;
+    }
+
+    .no-portada-caja {
+      height: 10vh;
+    }
+  }
 </style>

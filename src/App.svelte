@@ -119,6 +119,7 @@
   @media (max-width: 768px) {
     .main {
       --margin-main-sides: 10px;
+      margin-top: 50px;
       width: calc(100% - 20px);
     }
   }

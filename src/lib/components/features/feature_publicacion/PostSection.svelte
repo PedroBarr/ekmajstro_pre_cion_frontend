@@ -486,6 +486,10 @@ console.log(partes_negrita);
     .segmento-contenido-texto {
       font-size: 12px;
     }
+
+    .segmento-contenido-texto.flyer-texto::before {
+      background-size: contain;
+    }
   }
 
 </style>

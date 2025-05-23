@@ -196,4 +196,23 @@
     display: none;
   }
 
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .pie-imagen-container {
+      position: fixed;
+      bottom: 0;
+    }
+
+    .pie-imagen-content {
+      max-width: 80vw;
+      padding: 5px 10px;
+
+      font-size: 0.8em;
+    }
+
+    .pie-imagen-icono {
+      max-width: calc(1.5 * var(--desplazamiento-pie));
+    }
+  }
+
 </style>

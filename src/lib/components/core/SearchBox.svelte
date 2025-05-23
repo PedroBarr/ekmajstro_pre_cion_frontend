@@ -1,9 +1,21 @@
 <script>
   // exportar dependencias
-  export let buttonClass = '';
+  export let buttonClass = '', onInput = (_) => {}, disparar_al_vaciar = false;
+
+  let valor = '';
+  let es_desabilitado = true;
+
+  const onInputChange = (e) => {
+    valor = e.target.value;
+    es_desabilitado = valor.length === 0;
+
+    if (valor.length === 0 && disparar_al_vaciar) {
+      onInput(valor);
+    }
+  };
 </script>
 
-<form class="container">
+<div class="container">
   <div class="input-group">
     <div class="icon-wrapper">
       <svg
@@ -23,18 +35,27 @@
     <input
         placeholder="Ingrese datos relacionados al recurso..."
         value=""
-        class="grouped-input" />
+        class="grouped-input"
+        on:change={() => {
+          if (!es_desabilitado) onInput(valor);
+        }}
+        on:input={onInputChange}
+    />
   </div>
 
   <div class="flex-row flex-align-center box100 flex-around">
     <button
-        disabled
+        disabled={es_desabilitado}
         type="submit"
-        class={"bottom-side-button " + buttonClass}>
+        class={"bottom-side-button " + buttonClass}
+        on:click={() => {
+          onInput(valor);
+        }}
+      >
       Buscar
     </button>
   </div>
-</form>
+</div>
 
 <style>
   .container {

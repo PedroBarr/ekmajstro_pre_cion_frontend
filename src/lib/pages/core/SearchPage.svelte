@@ -21,23 +21,13 @@
 
   let previsualizaciones: PrevisualizacionEntrada[] = [];
 
-  onMount(
-    async ( ) => {
-      /*
-      * Actualizar consigna del sitio
-      */
-      fetch(api)
-      .then(response => response.json() )
-      .then(data => {
-        setConsigna('\u269E ' + corregirEntidades(data) + ' \u269F');
-      });
-
-      fetch (api + '/entradas')
+  const obtenerPrevisualizaciones = async (busqueda: String = '') => {
+    fetch (api + '/entradas?busqueda=' + busqueda)
         .then(response => response.json() )
         .then(data => {
           console.log(data);
 
-          if (data && data.length && data.length > 0) {
+          if (data) {
             previsualizaciones = data.map((previsualizacion: any) => {
               switch (previsualizacion.prev_tipo) {
                 case 'ANUNCIO': return new PrevisualizacionAnuncio({
@@ -66,6 +56,20 @@
             });
           }
         });
+  };
+
+  onMount(
+    async ( ) => {
+      /*
+      * Actualizar consigna del sitio
+      */
+      fetch(api)
+      .then(response => response.json() )
+      .then(data => {
+        setConsigna('\u269E ' + corregirEntidades(data) + ' \u269F');
+      });
+
+      obtenerPrevisualizaciones();
     }
   );
 </script>
@@ -73,14 +77,25 @@
 <div class="container">
   <div class="search-box-wrapper">
     <div class="search-box-inner">
-      <SearchBox />
+      <SearchBox
+        onInput={event => {
+          obtenerPrevisualizaciones(event);
+        }}
+        disparar_al_vaciar={true}
+      />
     </div>
   </div>
 
   <div class="preview-box-container">
-    <PreviewContainer
-      { previsualizaciones }
-    />
+    {#if previsualizaciones.length > 0}
+      <PreviewContainer
+        { previsualizaciones }
+      />
+    {:else}
+      <div class="no-results">
+        <p>No se encontraron resultados para la búsqueda.</p>
+      </div>
+    {/if}
 
     <div class="pagination-container">
     </div>

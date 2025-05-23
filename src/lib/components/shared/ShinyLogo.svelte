@@ -26,6 +26,7 @@
   >
     <a
         rel="noreferrer"
+        href=null
         on:click={(e) => {
           e.preventDefault();
           if (logoTraza.redirigir) {
@@ -91,6 +92,21 @@
 
   .bottom-corner.right-corner {
     border-bottom-right-radius: 0px;
+  }
+
+  /* Responsive design */
+
+  @media (max-width: 768px) {
+    .inner-container {
+      width: calc(100% - 6px);
+      height: calc(100% - 6px);
+      margin: 2px;
+    }
+
+    .logo {
+      padding: 20%;
+      width: 60%;
+    }
   }
 
 </style>

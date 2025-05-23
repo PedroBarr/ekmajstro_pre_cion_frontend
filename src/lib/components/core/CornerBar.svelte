@@ -1,6 +1,6 @@
 <script>
   // exportar dependencias
-  export let trazabilidad, funcionalidad, opciones;
+  export let trazabilidad, funcionalidad, opciones, ocultar_en_movil = false;
 
   // importar componentes
   import ShinyLogo from '../shared/ShinyLogo.svelte';
@@ -74,7 +74,7 @@
 </script>
 
 <div class="container {posicion}">
-  <ul class="menuRadial" style="--color: {funcionalidad.color}">
+  <ul class="menuRadial {ocultar_en_movil ? 'ocultar_en_movil' : ''}" style="--color: {funcionalidad.color}">
     {#each [...opciones,...opciones].slice(elementoInicial, elementoInicial + funcionalidad.numOpciones) as opcion, indice}
       <li class="elemento" style={getStyleElemento(indice)}>
         <button
@@ -388,4 +388,88 @@
     border-bottom-left-radius: 50%;
     border-bottom-right-radius: 50%;
   }
+
+  /* Responsive design */
+
+  @media (max-width: 768px) {
+    .container {
+      width: 50px;
+      height: 50px;
+    }
+
+    .top-corner {
+      top: -10px;
+    }
+
+    .bottom-corner {
+      bottom: -10px;
+    }
+
+    .logotipo {
+      width: 70px;
+      height: 70px;
+      translate: 5px -118px;
+    }
+
+    .right-corner .logotipo {
+      translate: -22px -121px;
+    }
+
+    .menuRadial {
+      width: 120px;
+      height: 120px;
+    }
+
+    .elemento {
+      width: calc(150px * 2/3);
+      height: calc(150px * 2/3);
+    }
+
+    .subelemento {
+      transform-origin: calc(var(--centroX) * 0.5) calc(var(--centroY) * 0.5);
+
+      width: 15px;
+      height: 15px;
+      
+      top: 70%;
+      left: 40%;
+    }
+
+    .ocultar_en_movil.menuRadial {
+      width: 0px;
+      border-width: 0;
+    }
+
+    .ocultar_en_movil .elemento {
+      display: none;
+    }
+
+    .boton-seguir {
+      top: 110px;
+      left: 10px;
+
+      width: 20px;
+      height: 20px;
+
+      padding: 0;
+      margin: 0;
+    }
+
+    .boton-volver {
+      top: 7px;
+      left: 110px;
+
+      width: 20px;
+      height: 20px;
+
+      padding: 0;
+      margin: 0;
+    }
+
+    .boton_navegar_siguiente {
+      width: 10px;
+      height: 10px;
+    }
+  }
+
 </style>

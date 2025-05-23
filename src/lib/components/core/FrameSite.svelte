@@ -57,6 +57,8 @@
           enlace: '/acerca_de',
           redirigir: true
       }}
+
+      ocultar_en_movil={ true }
   />
 </div>
 
@@ -95,6 +97,21 @@
     transform: skewY(-3deg) skewX(-6deg) rotate3d(3, -3, 1, 12deg) translateY(-6px);
     filter: drop-shadow(2px 4px 6px black);
     -webkit-text-stroke: thick;
+  }
+
+  /* Responsive design */
+
+  @media (max-width: 768px) {
+    .band-continer {
+      height: 50px;
+    }
+
+    .band-title {
+      margin-left: 22%;
+      margin-right: 13%;
+      width: 65%;
+      font-size: 12px;
+    }
   }
 
 </style>

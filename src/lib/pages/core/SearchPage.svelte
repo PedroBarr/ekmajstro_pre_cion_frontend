@@ -173,6 +173,13 @@
       width: 100%;
       height: auto;
     }
+
+    .no-results {
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      word-spacing: 1px;
+      text-align: center;
+    }
   }
 
 </style>

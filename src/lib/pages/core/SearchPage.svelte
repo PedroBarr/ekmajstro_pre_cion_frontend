@@ -94,6 +94,17 @@
     {:else}
       <div class="no-results">
         <p>No se encontraron resultados para la búsqueda.</p>
+        <!-- Icono de interrogacion -->
+        <svg
+          viewBox="0 0 24 24"
+          focusable="false"
+          class="text-partner-icon">
+          <path
+            fill="currentColor"
+            d="M12,2A10,10,0,1,0,22,12,10.011,10.011,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8.009,8.009,0,0,1,12,20ZM11.5,
+              7h1v1h-1ZM11.5,9h1v6h-1Z">
+          </path>
+        </svg>
       </div>
     {/if}
 
@@ -123,6 +134,27 @@
     height: fit-content;
     display: flex;
     justify-content: center;
+  }
+
+  .no-results {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    font-size: 1.5rem;
+    color: #888;
+    letter-spacing: 3px;
+    word-spacing: 2px;
+    font-size: x-large;
+    font-family: system-ui;
+    text-transform: uppercase;
+    font-style: oblique;
+  }
+
+  .no-results svg {
+    transform: scale(2);
   }
 
   /* Responsive design */

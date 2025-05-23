@@ -14,6 +14,8 @@
   // importar componentes
   import PostSection from '../feature_publicacion/PostSection.svelte';
 
+  const ES_MOVIL = window.innerWidth <= 768;
+
 	let emergente: any;
   
   let marco: string = "";
@@ -187,6 +189,16 @@
           />
         {/if}
       </div>
+
+      {#if ES_MOVIL}
+        <div class="icono-divisor">
+          <img
+            class="icono-emergente"
+            alt="Icono emergente"
+            src={ icono }
+          />
+        </div>
+      {/if}
 
       <div class="previsualizacion-detalles-envoltura">
         {#if portada}
@@ -516,6 +528,75 @@
   
   ::-webkit-scrollbar {
     display: none;
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .fondo-dialogo {
+      --width-size: 80vw;
+      --height-size: 85vh;
+
+      --border-size: 5px;
+    }
+
+    .contenido-dialogo {
+      width: var(--width-size);
+      height: var(--height-size);
+
+      padding: 0 5px;
+    }
+
+    .contenido-publicacion {
+      flex-direction: column;
+    }
+
+    .previsualizacion-principal-envoltura,
+    .previsualizacion-detalles-envoltura {
+      width: 100%;
+    }
+
+    .previsualizacion-titulo-envoltura {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .previsualizacion-titulo {
+      font-size: 14px;
+    }
+
+    .boton-continuar {
+      width: 40px;
+      height: 40px;
+
+      position: relative;
+      right: 0;
+      left: 0;
+    }
+
+    .icono-divisor {
+      margin: 5px 0;
+      --padding-icono: 3px;
+      padding: calc(2 * var(--padding-icono)) var(--padding-icono);
+
+      width: 30px;
+      height: 30px;
+
+      border-radius: 50%;
+      background-color: var(--color-remarcado);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      align-self: center;
+    }
+
+    .portada-contenedor {
+      padding: 0;
+    }
   }
 
 </style>

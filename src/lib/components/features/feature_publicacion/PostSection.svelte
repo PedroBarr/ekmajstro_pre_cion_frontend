@@ -465,4 +465,27 @@ console.log(partes_negrita);
     filter: invert(0.5) opacity(0.2);
   }
 
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .segmento-contenedor {
+      --gap: 5px;
+    }
+
+    .segmento-contenido {
+      --padding-right: 5px;
+      --padding-left: 5px;
+    }
+
+    .segmento-contenido.\31-col,
+    .segmento-contenido.\32-col,
+    .segmento-contenido.\33-col,
+    .segmento-contenido.\34-col {
+      width: 100%;
+    }
+
+    .segmento-contenido-texto {
+      font-size: 12px;
+    }
+  }
+
 </style>

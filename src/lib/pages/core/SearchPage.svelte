@@ -4,6 +4,7 @@
 
   // importar componentes
   import SearchBox from '../../components/core/SearchBox.svelte';
+  import Loading from '../../components/core/Loading.svelte';
   import PreviewContainer from '../../components/features/feature_entradas/PreviewContainer.svelte';
 
   // importar dependencias nativas
@@ -20,8 +21,11 @@
   } from '../../models/previsualizacion';
 
   let previsualizaciones: PrevisualizacionEntrada[] = [];
+  let cargando = false;
 
   const obtenerPrevisualizaciones = async (busqueda: String = '') => {
+    cargando = true;
+
     fetch (api + '/entradas?busqueda=' + busqueda)
         .then(response => response.json() )
         .then(data => {
@@ -55,6 +59,9 @@
               }
             });
           }
+        })
+        .finally(() => {
+          cargando = false;
         });
   };
 
@@ -87,7 +94,12 @@
   </div>
 
   <div class="preview-box-container">
-    {#if previsualizaciones.length > 0}
+    {#if cargando}
+      <Loading
+        size="large"
+        color="#888"
+      />
+    {:else if previsualizaciones.length > 0}
       <PreviewContainer
         { previsualizaciones }
       />

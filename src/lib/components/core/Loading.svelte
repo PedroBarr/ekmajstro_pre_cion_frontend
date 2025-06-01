@@ -7,9 +7,13 @@
 
 <div class="loading-container {size}">
     <div class="loading-spinner" style="border-color: {color};">
-        <div class="spinner-inner-left" style="border-bottom-color: {color};"></div>
-        <div class="spinner-inner-center" style="border-top-color: {color};"></div>
-        <div class="spinner-inner-right" style="border-top-color: {color};"></div>
+        <div class="spinner-inner-hidden" style="border-top-color: transparent;">
+            <div class="spinner-inner-left" style="border-bottom-color: {color};">
+                <div class="spinner-inner-center" style="border-top-color: {color};">
+                    <div class="spinner-inner-right" style="border-top-color: {color};"></div>
+                </div>
+            </div>
+        </div>
     </div>
     <p class="loading-text" style="color: {color};">{loading_text}</p>
 </div>
@@ -42,6 +46,7 @@
     }
 
     .spinner-inner-right,
+    .spinner-inner-hidden,
     .spinner-inner-center,
     .spinner-inner-left {
         position: absolute;
@@ -93,45 +98,23 @@
         height: 50px;
     }
     .loading-container.large {
-        height: 100px;
+        height: 150px;
     }
     .loading-container.medium {
         height: 70px;
     }
     @media (max-width: 768px) {
         .loading-container {
-            height: 50px;
+            height: 100px;
+            margin-top: 40px;
         }
         .loading-spinner {
             width: 20px;
             height: 20px;
         }
         .loading-text {
-            font-size: 12px;
-        }
-    }
-    @media (min-width: 769px) {
-        .loading-container {
-            height: 70px;
-        }
-        .loading-spinner {
-            width: 40px;
-            height: 40px;
-        }
-        .loading-text {
             font-size: 16px;
-        }
-    }
-    @media (min-width: 1200px) {
-        .loading-container {
-            height: 100px;
-        }
-        .loading-spinner {
-            width: 60px;
-            height: 60px;
-        }
-        .loading-text {
-            font-size: 20px;
+            font-weight: bold;
         }
     }
 </style>
